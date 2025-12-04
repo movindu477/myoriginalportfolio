@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle } from 'lucide-react';
 import { InstagramLogoIcon } from '@phosphor-icons/react/dist/ssr';
 
 const Contact = () => {
@@ -9,9 +9,8 @@ const Contact = () => {
     subject: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const backgroundRef = useRef(null);
 
   // Mouse move effect for background
@@ -87,27 +86,24 @@ const Contact = () => {
     
     if (!validateForm()) return;
 
-    setIsSubmitting(true);
-
-    // Simulate API call
-    try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Here you would typically send the data to your backend
-      console.log('Form submitted:', formData);
-      
-      setIsSubmitted(true);
+    // Show success animation
+    setIsSubmitted(true);
+    
+    // Create WhatsApp message with form data
+    const whatsappMessage = `Hello! I'm ${formData.name}.\n\nSubject: ${formData.subject}\n\nMessage: ${formData.message}\n\nEmail: ${formData.email}`;
+    const whatsappNumber = '94743090367'; // Sri Lanka country code +94
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    
+    // Wait for animation to show, then open WhatsApp after 1.5 seconds
+    setTimeout(() => {
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    }, 1500);
+    
+    // Reset form after showing success
+    setTimeout(() => {
       setFormData({ name: '', email: '', subject: '', message: '' });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
+      setIsSubmitted(false);
+    }, 3000);
   };
 
   const contactInfo = [
@@ -147,7 +143,7 @@ const Contact = () => {
     {
       icon: InstagramLogoIcon,
       label: '',
-      href: 'https://twitter.com/movindu',
+      href: 'https://www.instagram.com/itz.movi_jr/?utm_source=qr&igsh=MXhiMms0M2kwa3c5cg%3D%3D#',
       color: 'hover:text-sky-400'
     }
   ];
@@ -156,7 +152,7 @@ const Contact = () => {
     <section
       id="contact"
       ref={backgroundRef}
-      className="w-full min-h-screen bg-black text-white relative overflow-hidden"
+      className="w-full min-h-screen bg-black text-white relative overflow-hidden border-t border-white/10"
     >
       {/* Animated Grid Background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
@@ -219,10 +215,10 @@ const Contact = () => {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="group flex items-center gap-4 p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:scale-[1.02] animate-slideIn"
+                  className="group flex items-center gap-4 p-4 border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:scale-[1.02] animate-slideIn"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <item.icon className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
@@ -245,7 +241,7 @@ const Contact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group w-12 h-12 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:border-white/20 ${social.color} animate-slideIn`}
+                    className={`group w-12 h-12 border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:border-white/20 ${social.color} animate-slideIn`}
                     style={{ animationDelay: `${(index + 3) * 100}ms` }}
                   >
                     <social.icon className="w-5 h-5 text-gray-400 group-hover:text-current transition-colors duration-300" />
@@ -258,13 +254,23 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="relative">
             <div className="relative p-8 sm:p-10 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm">
-              {/* Success Message */}
+              {/* Success Message Overlay */}
               {isSubmitted && (
-                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm rounded-3xl flex items-center justify-center z-10 animate-fadeIn">
-                  <div className="text-center p-8">
-                    <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                    <p className="text-gray-400">Thank you for reaching out. I'll get back to you soon.</p>
+                <div className="absolute inset-0 bg-black/90 backdrop-blur-md rounded-3xl flex items-center justify-center z-20 animate-fadeIn">
+                  <div className="text-center p-8 animate-slideUp">
+                    <div className="relative mb-6">
+                      <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center animate-scaleIn">
+                        <CheckCircle className="w-12 h-12 text-white animate-checkMark" />
+                      </div>
+                      <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20"></div>
+                    </div>
+                    <h3 className="text-3xl font-bold text-white mb-3 animate-fadeInUp">Message Sent!</h3>
+                    <p className="text-gray-300 text-lg mb-2 animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
+                      Your message is being sent to WhatsApp
+                    </p>
+                    <p className="text-gray-400 text-sm animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
+                      Opening WhatsApp...
+                    </p>
                   </div>
                 </div>
               )}
@@ -363,21 +369,11 @@ const Contact = () => {
                 <div className="animate-slideIn" style={{ animationDelay: '800ms' }}>
                   <button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="group relative w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-500 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                    className="group relative w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-500 transform hover:scale-[1.02]"
                   >
                     <div className="flex items-center justify-center gap-3">
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                          <span>Sending...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                          <span>Send Message</span>
-                        </>
-                      )}
+                      <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                      <span>Send Message</span>
                     </div>
                     
                     {/* Hover glow effect */}
@@ -398,6 +394,78 @@ const Contact = () => {
           </p>
         </div>
       </div>
+
+      {/* Success Animation Styles */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.5);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        @keyframes checkMark {
+          0% {
+            opacity: 0;
+            transform: scale(0) rotate(-45deg);
+          }
+          50% {
+            transform: scale(1.2) rotate(-45deg);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+        }
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out forwards;
+        }
+        .animate-slideUp {
+          animation: slideUp 0.5s ease-out forwards;
+        }
+        .animate-scaleIn {
+          animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        .animate-checkMark {
+          animation: checkMark 0.6s ease-out forwards;
+          animation-delay: 0.2s;
+        }
+        .animate-fadeInUp {
+          animation: fadeInUp 0.5s ease-out forwards;
+          opacity: 0;
+        }
+      `}</style>
     </section>
   );
 };

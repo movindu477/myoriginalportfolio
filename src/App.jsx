@@ -8,7 +8,6 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects/Projects'
-import AllProjectsPage from './components/Projects/AllProjectsPage'
 import Contact from './components/Contact'
 import Tech from './components/Tech'
 
@@ -22,13 +21,17 @@ function App() {
           <>
             <Navbar />
             <Hero />
-            <About />
             <Tech />
             <Projects />
             <Contact />
           </>
         } />
-        <Route path="/projects" element={<AllProjectsPage />} />
+        <Route path="/about" element={
+          <>
+            <Navbar />
+            <About />
+          </>
+        } />
       </Routes>
     </Router>
   )

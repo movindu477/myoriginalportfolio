@@ -103,7 +103,7 @@ const Tech = () => {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
     );
 
     if (sectionRef.current) {
@@ -113,71 +113,58 @@ const Tech = () => {
     return () => observer.disconnect();
   }, []);
 
-  const TechCard = ({ tech, index }) => {
-    // Function to get the first letter of the technology name
-    const getInitial = (name) => {
-      return name.charAt(0);
-    };
+  // Also set visible on mount as fallback
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
+  const TechCard = ({ tech, index }) => {
     return (
       <div 
-        className={`group relative p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-700 transform hover:scale-105 hover:border-white/20 hover:bg-white/10 ${
-          isVisible ? 'animate-slideIn opacity-100' : 'opacity-0 translate-y-10'
+        className={`group relative bg-black border border-white p-6 sm:p-8 transition-all duration-300 hover:border-white/70 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
         style={{ 
-          animationDelay: `${index * 100}ms`,
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+          transitionDelay: `${index * 100}ms`
         }}
       >
-        {/* Glow effect */}
-        <div 
-          className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"
-          style={{ 
-            background: `radial-gradient(circle at center, ${tech.color}20 0%, transparent 70%)`
-          }}
-        ></div>
-        
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center text-center">
-          {/* Icon Container */}
-          <div 
-            className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
-            style={{ 
-              background: `linear-gradient(135deg, ${tech.color}20, ${tech.color}10)`,
-              border: `1px solid ${tech.color}30`
-            }}
-          >
-            {/* Technology Initial */}
-            <span 
-              className="text-2xl font-bold transition-all duration-500 group-hover:scale-110"
-              style={{ color: tech.color }}
-            >
-              {getInitial(tech.name)}
-            </span>
-          </div>
-          
-          {/* Name */}
-          <h3 
-            className="text-lg font-bold mb-2 transition-colors duration-300"
-            style={{ color: tech.color }}
-          >
+        {/* Top Section - Tags */}
+        <div className="flex items-center gap-2 mb-4 sm:mb-6">
+          <div className="px-3 py-1 bg-red-600 border border-white text-white text-xs sm:text-sm font-medium">
             {tech.name}
-          </h3>
-          
-          {/* Description */}
-          <p className="text-gray-400 text-sm font-medium">
+          </div>
+          <div className="px-3 py-1 bg-red-600 text-white text-xs sm:text-sm font-medium">
             {tech.description}
+          </div>
+        </div>
+
+        {/* Main Title */}
+        <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+          {tech.name.toUpperCase()}
+        </h3>
+
+        {/* Description with Red Accent Line */}
+        <div className="flex gap-4 mb-6 sm:mb-8">
+          {/* Red vertical accent line */}
+          <div className="w-1 bg-red-600 flex-shrink-0"></div>
+          {/* Description text */}
+          <p className="text-white/90 text-sm sm:text-base leading-relaxed font-light">
+            {tech.description} technology for building modern applications and solutions.
           </p>
         </div>
 
-        {/* Hover border effect */}
-        <div 
-          className="absolute inset-0 rounded-3xl border-2 opacity-0 group-hover:opacity-100 transition-all duration-500"
-          style={{ 
-            borderColor: tech.color,
-            boxShadow: `0 0 20px ${tech.color}40`
-          }}
-        ></div>
+        {/* Bottom Section - Technology Info */}
+        <div className="pt-4 border-t border-white/10">
+          <div className="text-white text-sm sm:text-base font-medium">
+            {tech.name}
+          </div>
+          <div className="text-white/70 text-xs sm:text-sm font-light mt-1">
+            Technology Stack
+          </div>
+        </div>
       </div>
     );
   };
@@ -186,7 +173,7 @@ const Tech = () => {
     <section
       id="tech"
       ref={sectionRef}
-      className="w-full min-h-screen bg-black text-white relative overflow-hidden"
+      className="w-full min-h-screen bg-black text-white relative overflow-hidden border-t border-white/10 px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 lg:py-24"
     >
       {/* Background with mouse interaction */}
       <div ref={backgroundRef} className="absolute inset-0 transition-all duration-300">
@@ -247,9 +234,9 @@ const Tech = () => {
           </p>
         </div>
 
-        {/* Technologies Grid - Glassy Cards */}
+        {/* Technologies Grid - Modern Card Design */}
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 sm:gap-8 max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl w-full">
             {technologies.map((tech, index) => (
               <TechCard 
                 key={tech.name} 
@@ -260,37 +247,6 @@ const Tech = () => {
           </div>
         </div>
 
-        {/* Stats Section */}
-        <div className={`text-center mt-20 lg:mt-24 transition-all duration-1000 ${
-          isVisible ? 'animate-slideIn opacity-100' : 'opacity-0 translate-y-10'
-        }`} style={{ animationDelay: '1200ms' }}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
-            <div className="p-6 rounded-2xl border border-purple-500/20 bg-purple-500/5 backdrop-blur-xl">
-              <div className="text-2xl sm:text-3xl font-bold text-purple-400 mb-2">
-                {technologies.length}
-              </div>
-              <div className="text-gray-400 text-sm">Technologies</div>
-            </div>
-            <div className="p-6 rounded-2xl border border-pink-500/20 bg-pink-500/5 backdrop-blur-xl">
-              <div className="text-2xl sm:text-3xl font-bold text-pink-400 mb-2">
-                1+
-              </div>
-              <div className="text-gray-400 text-sm">Years Experience</div>
-            </div>
-            <div className="p-6 rounded-2xl border border-rose-500/20 bg-rose-500/5 backdrop-blur-xl">
-              <div className="text-2xl sm:text-3xl font-bold text-rose-400 mb-2">
-                10+
-              </div>
-              <div className="text-gray-400 text-sm">Projects Completed</div>
-            </div>
-            <div className="p-6 rounded-2xl border border-purple-500/20 bg-purple-500/5 backdrop-blur-xl">
-              <div className="text-2xl sm:text-3xl font-bold text-purple-400 mb-2">
-                100%
-              </div>
-              <div className="text-gray-400 text-sm">Dedication</div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
