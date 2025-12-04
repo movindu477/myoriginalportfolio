@@ -66,6 +66,11 @@ const Tech = () => {
       color: '#FB7A24',
       description: 'Development Server'
     },
+    { 
+      name: 'Flutter', 
+      color: '#02569B',
+      description: 'Mobile Framework'
+    },
   ];
 
   // Mouse move effect for background
