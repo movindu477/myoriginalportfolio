@@ -94,7 +94,7 @@ const About = () => {
   ];
 
   return (
-    <section className="w-full h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white relative overflow-hidden">
+    <section className="w-full min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white relative overflow-hidden">
       {/* Modern Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-indigo-600 rounded-full mix-blend-soft-light filter blur-[100px] opacity-20 animate-pulse"></div>
@@ -105,24 +105,25 @@ const About = () => {
       {/* Modern Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.05)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
 
-      {/* Back Button - Modern */}
-      <div className="relative z-20 pt-4 sm:pt-6 md:pt-8">
+      {/* Back Button - Modern - Fixed Position */}
+      <div className="relative z-30 pt-20 sm:pt-24 md:pt-28 lg:pt-20 xl:pt-24">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
           <button
             onClick={() => navigate("/")}
-            className="group flex items-center gap-2 text-white/70 hover:text-white transition-all duration-300 mb-2 sm:mb-4"
+            className="group relative flex items-center gap-2 text-white hover:text-white/90 bg-white/5 hover:bg-white/10 backdrop-blur-sm px-3 py-2 rounded-lg border border-white/10 transition-all duration-300 mb-4 sm:mb-6 md:mb-8 cursor-pointer z-40"
+            type="button"
           >
             <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:-translate-x-1" />
-            <span className="text-xs sm:text-sm font-light">Back to Home</span>
+            <span className="text-xs sm:text-sm font-medium">Back to Home</span>
           </button>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-[calc(100vh-60px)] sm:h-[calc(100vh-80px)] flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 w-full items-center">
-          {/* Left Side - Content */}
-          <div className="flex flex-col space-y-4 sm:space-y-6 order-2 lg:order-1">
+      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 md:px-6 min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-100px)] py-4 sm:py-6 md:py-10 flex flex-col justify-start lg:justify-center">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 w-full">
+          {/* Content Section - Always First on Mobile */}
+          <div className="flex flex-col space-y-4 sm:space-y-6 w-full order-1">
             {/* Header Section */}
             <div 
               className={`space-y-3 sm:space-y-4 transition-all duration-1000 ease-out ${
@@ -131,10 +132,10 @@ const About = () => {
                   : 'opacity-0 translate-y-10'
               }`}
             >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-slate-200 to-white bg-clip-text text-transparent">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-white via-slate-200 to-white bg-clip-text text-transparent leading-tight">
                 About Me
               </h1>
-              <p className="text-slate-400 text-sm sm:text-base md:text-lg">
+              <p className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed">
                 Here's what's happening with my development journey.
               </p>
               <div className="w-20 sm:w-24 h-0.5 bg-gradient-to-r from-indigo-500 to-transparent"></div>
@@ -191,9 +192,9 @@ const About = () => {
             </div>
           </div>
 
-          {/* Right Side - Stats Cards */}
+          {/* Stats Cards - Below Content on Mobile, Right Side on Desktop */}
           <div 
-            className={`grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 transition-all duration-1000 ease-out delay-200 order-1 lg:order-2 ${
+            className={`grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 transition-all duration-1000 ease-out delay-200 order-2 lg:order-2 w-full ${
               mounted 
                 ? 'opacity-100 translate-y-0' 
                 : 'opacity-0 translate-y-10'
