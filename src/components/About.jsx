@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Users, Code, Award, TrendingUp, Download, MessageCircle } from "lucide-react";
-import resumeFile from "../assets/CV.pdf";
+import resumeFile from "../assets/Movindu.pdf";
 
 const About = () => {
   const navigate = useNavigate();
