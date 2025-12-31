@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import heroVideo from "../assets/hero.mp4";
 import ProfileCard from "./ProfileCard/ProfileCard";
-import Ballpit from "./Ballpit/Ballpit";
 
 const Hero = () => {
   const [currentText, setCurrentText] = useState(0);
@@ -38,14 +38,44 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen w-full flex items-center justify-center overflow-visible bg-black pb-8 sm:pb-12 md:pb-16 lg:pb-20">
-      {/* Ballpit Background */}
+      {/* Abstract Light Effects Background */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <Ballpit
-          count={40}
-          gravity={0}
-          followCursor={true}
-          className="w-full h-full"
-        />
+        {/* Video Background with reduced opacity */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover opacity-30"
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
+
+        {/* Abstract Ripple Effects */}
+        <div className="absolute inset-0">
+          {/* Central Light Pillar */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-[120%] bg-gradient-to-b from-white/20 via-white/10 to-transparent blur-3xl opacity-60 animate-pulse"></div>
+
+          {/* Ripple Patterns */}
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full border border-white/20 animate-ripple"
+              style={{
+                width: `${200 + i * 100}px`,
+                height: `${200 + i * 100}px`,
+                top: `${20 + i * 10}%`,
+                left: `${30 + i * 5}%`,
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: `${4 + i * 0.5}s`,
+              }}
+            />
+          ))}
+
+          {/* Glowing Orbs */}
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        </div>
       </div>
 
       {/* Content - Modern Minimalist Layout with ProfileCard */}
