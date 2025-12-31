@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-const ProjectCard = ({ project, onLiveDemoClick }) => {
+const ProjectCard = ({ project }) => {
   const cardRef = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -61,11 +61,11 @@ const ProjectCard = ({ project, onLiveDemoClick }) => {
           <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse"></div>
         </div>
 
-        {/* GIF/Image Placeholder */}
+        {/* Project Image */}
         <div className="mb-4 rounded-xl overflow-hidden bg-gradient-to-br from-purple-500/10 to-pink-500/10 aspect-video flex items-center justify-center border border-white/5 group-hover:border-white/10 transition-all duration-500">
-          {project.gif ? (
+          {project.image ? (
             <img 
-              src={project.gif} 
+              src={project.image} 
               alt={project.title}
               className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
             />
@@ -113,9 +113,7 @@ const ProjectCard = ({ project, onLiveDemoClick }) => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              if (onLiveDemoClick) {
-                onLiveDemoClick();
-              } else {
+              if (project.liveDemo) {
                 window.open(project.liveDemo, '_blank', 'noopener,noreferrer');
               }
             }}

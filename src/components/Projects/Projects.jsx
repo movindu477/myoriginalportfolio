@@ -1,19 +1,22 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
+import image1 from '../../assets/1.png';
+import image2 from '../../assets/2.png';
+import image3 from '../../assets/3.png';
+import image6 from '../../assets/6.png';
 
 const Projects = () => {
   const backgroundRef = useRef(null);
-  const [showComingSoon, setShowComingSoon] = useState(false);
 
   // Mouse move effect for background
   useEffect(() => {
     const handleMouseMove = (e) => {
       if (!backgroundRef.current) return;
-      
+
       const { clientX, clientY } = e;
       const x = (clientX / window.innerWidth) * 100;
       const y = (clientY / window.innerHeight) * 100;
-      
+
       backgroundRef.current.style.background = `
         radial-gradient(
           circle at ${x}% ${y}%,
@@ -37,7 +40,7 @@ const Projects = () => {
       description: "Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.",
       tech: ["React", "JavaScript"],
       liveDemo: "https://safarihub-main.vercel.app/",
-
+      image: image1,
     },
     {
       id: 2,
@@ -45,7 +48,7 @@ const Projects = () => {
       description: "Productivity application with real-time updates, drag-and-drop functionality, and team collaboration features.",
       tech: ["HTML", "CSS", "JavaScript"],
       liveDemo: "https://sedek-caritas-web-site.vercel.app/",
-
+      image: image2,
     },
     {
       id: 3,
@@ -53,71 +56,15 @@ const Projects = () => {
       description: "Real-time weather application with beautiful UI, location-based forecasts, and interactive charts.",
       tech: ["HTML", "CSS", "Javascript"],
       liveDemo: "https://movindu477.github.io/ST.-Francis-De-Sales-Church-Site/",
-
+      image: image3,
     },
     {
       id: 4,
-      title: "Moelys POS Frontend Interface",
-      description: "Modern social platform with real-time messaging, post sharing, and user engagement features.",
-      tech: ["Dart", "C++", "CMake", "Swift", "HTML"],
-      liveDemo: "https://demo-social.com",
-
-    },
-    {
-      id: 5,
-      title: "Clay Art Portfolio Website",
-      description: "Creative portfolio showcase with smooth animations, dark mode, and responsive design.",
-      tech: ["HTML", "CSS", "Javascript"],
-      liveDemo: "https://clay-art-web-site-portfolio.vercel.app/",
-
-    },
-    {
-      id: 6,
-      title: "AI Chat Application",
-      description: "Intelligent chat application powered by AI with natural language processing and smart responses.",
-      tech: ["React", "OpenAI API", "Node.js", "WebSockets"],
-      liveDemo: "https://demo-aichat.com",
-
-    },
-    {
-      id: 7,
-      title: "PetMart (Ecommerce) Mobile App",
-      description: "Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.",
-      tech: ["Dart", "C++", "CMake", "Swift", "HTML"],
-      liveDemo: "https://demo-ecommerce.com",
-
-    },
-    {
-      id: 8,
       title: "Nuwan Fernando PVT(Ltd) Company Website",
       description: "Personal finance management app with expense tracking, budgeting, and financial insights.",
       tech: ["JavaScript", "CSS"],
       liveDemo: "https://demo-finance.com",
-
-    },
-    {
-      id: 9,
-      title: "AI Fashion Assistant Mobile App",
-      description: "Recipe discovery platform with advanced filtering, meal planning, and shopping list features.",
-      tech: ["Dart", "C++", "CMake", "Swift", "HTML"],
-      liveDemo: "https://demo-recipe.com",
-
-    },
-    {
-      id: 10,
-      title: "Law Portfolio Website",
-      description: "Workout tracking application with exercise library, progress monitoring, and social features.",
-      tech: ["HTML", "CSS", "Javascript"],
-      liveDemo: "https://demo-fitness.com",
-
-    },
-    {
-      id: 11,
-      title: "Music Player",
-      description: "Modern music streaming application with playlist management, audio visualization, and offline support.",
-      tech: ["React", "Web Audio API", "IndexedDB", "PWA"],
-      liveDemo: "https://demo-music.com",
-
+      image: image6,
     },
   ];
 
@@ -129,7 +76,7 @@ const Projects = () => {
     >
       {/* Animated Grid Background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
-      
+
       {/* Floating Particles */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-purple-500 rounded-full animate-float opacity-60"></div>
@@ -167,7 +114,7 @@ const Projects = () => {
           <div className="w-24 sm:w-32 h-0.5 bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto mb-8 sm:mb-12"></div>
 
           <p className="text-lg sm:text-xl md:text-2xl text-gray-400 max-w-3xl sm:max-w-4xl mx-auto leading-relaxed sm:leading-loose font-light">
-            Transforming ideas into <span className="text-purple-400 font-medium">digital experiences</span> through innovative solutions. 
+            Transforming ideas into <span className="text-purple-400 font-medium">digital experiences</span> through innovative solutions.
             Each project represents a unique challenge solved with cutting-edge technology and creative design.
           </p>
         </div>
@@ -175,48 +122,17 @@ const Projects = () => {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
           {projects.map((project, index) => (
-            <div 
-              key={project.id} 
+            <div
+              key={project.id}
               className="animate-slideIn group h-full"
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <div className="transform transition-all duration-700 group-hover:scale-[1.02] group-hover:-translate-y-2 h-full">
-                <ProjectCard project={project} onLiveDemoClick={() => setShowComingSoon(true)} />
+                <ProjectCard project={project} />
               </div>
             </div>
           ))}
         </div>
-
-        {/* Coming Soon Modal */}
-        {showComingSoon && (
-          <div 
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fadeIn"
-            onClick={() => setShowComingSoon(false)}
-          >
-            <div 
-              className="bg-black border border-white/20 rounded-2xl p-8 sm:p-10 max-w-md w-full mx-4 transform transition-all animate-slideUp"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-6 bg-red-600/20 rounded-full flex items-center justify-center">
-                  <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">Coming Soon</h3>
-                <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
-                  Some projects are currently ongoing and will be available soon. We're working hard to bring you the best experience.
-                </p>
-                <button
-                  onClick={() => setShowComingSoon(false)}
-                  className="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Add these animations to your CSS */}
