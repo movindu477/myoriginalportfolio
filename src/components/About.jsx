@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Users, Code, Award, TrendingUp, Download, MessageCircle } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Users, Code, Award, TrendingUp, Download } from "lucide-react";
 import resumeFile from "../assets/Movindu.pdf";
 
 const About = () => {
-  const navigate = useNavigate();
   const [mounted, setMounted] = useState(false);
   const [counters, setCounters] = useState({
     projects: 0,
@@ -94,7 +92,7 @@ const About = () => {
   ];
 
   return (
-    <section className="w-full min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white relative overflow-hidden">
+    <section id="about" className="w-full min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white relative overflow-hidden">
       {/* Modern Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-indigo-600 rounded-full mix-blend-soft-light filter blur-[100px] opacity-20 animate-pulse"></div>
@@ -105,22 +103,8 @@ const About = () => {
       {/* Modern Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.05)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
 
-      {/* Back Button - Modern - Fixed Position */}
-      <div className="relative z-30 pt-20 sm:pt-24 md:pt-28 lg:pt-20 xl:pt-24">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
-          <button
-            onClick={() => navigate("/")}
-            className="group relative flex items-center gap-2 text-white hover:text-white/90 bg-white/5 hover:bg-white/10 backdrop-blur-sm px-3 py-2 rounded-lg border border-white/10 transition-all duration-300 mb-4 sm:mb-6 md:mb-8 cursor-pointer z-40"
-            type="button"
-          >
-            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:-translate-x-1" />
-            <span className="text-xs sm:text-sm font-medium">Back to Home</span>
-          </button>
-        </div>
-      </div>
-
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 md:px-6 min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-100px)] py-4 sm:py-6 md:py-10 flex flex-col justify-start lg:justify-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-12 sm:py-16 md:py-20 lg:py-24 flex flex-col justify-start lg:justify-center">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 w-full">
           {/* Content Section - Always First on Mobile */}
           <div className="flex flex-col space-y-4 sm:space-y-6 w-full order-1">
@@ -158,9 +142,9 @@ const About = () => {
                 </p>
               </div>
 
-              {/* Action Buttons */}
+              {/* Download Resume Button */}
               <div 
-                className={`flex flex-col sm:flex-row gap-3 sm:gap-4 transition-all duration-1000 ease-out delay-300 ${
+                className={`transition-all duration-1000 ease-out delay-300 ${
                   mounted 
                     ? 'opacity-100 translate-y-0' 
                     : 'opacity-0 translate-y-10'
@@ -174,20 +158,6 @@ const About = () => {
                   <Download className="w-4 h-4 sm:w-5 sm:h-5 mr-2 transition-transform duration-300 group-hover:translate-y-[-2px]" />
                   <span className="whitespace-nowrap">Download Resume</span>
                 </a>
-                
-                <button 
-                  onClick={() => {
-                    navigate("/");
-                    setTimeout(() => {
-                      const contactSection = document.getElementById('contact');
-                      contactSection?.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
-                  }}
-                  className="group inline-flex items-center justify-center border-2 border-indigo-400 text-indigo-300 hover:bg-indigo-400 hover:text-white font-semibold px-6 sm:px-8 py-2.5 sm:py-3 rounded-full transition-all duration-300 transform hover:scale-105 backdrop-blur-sm text-sm sm:text-base w-full sm:w-auto"
-                >
-                  <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2 transition-transform duration-300 group-hover:translate-y-[-2px]" />
-                  <span className="whitespace-nowrap">Let's Talk</span>
-                </button>
               </div>
             </div>
           </div>

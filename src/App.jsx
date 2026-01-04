@@ -21,15 +21,10 @@ function App() {
           <>
             <Navbar />
             <Hero />
+            <About />
             <Tech />
             <Projects />
             <Contact />
-          </>
-        } />
-        <Route path="/about" element={
-          <>
-            <Navbar />
-            <About />
           </>
         } />
       </Routes>

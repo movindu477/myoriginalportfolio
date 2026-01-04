@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, Home, User, Folder, Mail, Sparkles, Zap } from "lucide-react";
+import { Menu, X, Home, User, Folder, Mail, UserCircle } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -11,6 +11,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", href: "#home", icon: Home, isRoute: false },
+    { name: "About", href: "#about", icon: UserCircle, isRoute: false },
     { name: "Technologies", href: "#tech", icon: User, isRoute: false },
     { name: "Projects", href: "#projects", icon: Folder, isRoute: false },
     { name: "Contact Me", href: "#contact", icon: Mail, isRoute: false },
@@ -236,20 +237,6 @@ const Navbar = () => {
               </div>
               <span className="text-xs font-medium text-white/80">Available</span>
             </div>
-            
-            {/* Modern Action Button */}
-            <button
-              onClick={() => {
-                navigate("/about");
-                setMenuOpen(false);
-              }}
-              className="group relative px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-purple-500/25 flex items-center gap-2"
-              aria-label="Go to About Me"
-            >
-              <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
-              <span>About Me</span>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
-            </button>
           </div>
 
           {/* Mobile/Tablet Hamburger Menu Button - Modern */}
@@ -345,26 +332,6 @@ const Navbar = () => {
               );
             })}
 
-            {/* Divider */}
-            <div className="my-4 border-t border-white/10"></div>
-
-            {/* About Me Button - Mobile */}
-            <button
-              onClick={() => {
-                navigate("/about");
-                setMenuOpen(false);
-              }}
-              className="group relative w-full px-4 py-3.5 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-base font-medium transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-purple-500/25 flex items-center justify-center gap-2"
-              style={{
-                animationDelay: menuOpen ? `${navLinks.length * 50}ms` : '0ms',
-                animation: menuOpen ? 'slideInRight 0.3s ease-out forwards' : 'none',
-                opacity: menuOpen ? 1 : 0
-              }}
-            >
-              <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-              <span>About Me</span>
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
-            </button>
           </div>
         </div>
       </div>

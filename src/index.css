@@ -284,6 +284,13 @@ button:focus-visible {
   body {
     @apply bg-background text-foreground;
   }
+  button,
+  a[role="button"],
+  [role="button"],
+  a[href]:not([href^="#"]):not([href^="mailto:"]):not([href^="tel:"]),
+  .cursor-pointer {
+    cursor: pointer !important;
+  }
 }
 
 /* Custom Animations for Hero Component */

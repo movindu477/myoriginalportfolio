@@ -259,14 +259,15 @@
 
 .pc-avatar-content .avatar {
   width: 100%;
+  height: 100%;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%) scale(1);
-  bottom: 2px;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   z-index: 15;
   object-fit: cover;
-  height: auto;
+  object-position: center;
   filter: none; /* Remove any filters that might affect colors */
   mix-blend-mode: normal; /* Ensure normal blend mode for the image */
 }
