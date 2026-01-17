@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, Home, User, Folder, Mail, UserCircle } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -157,7 +158,7 @@ const Navbar = () => {
       {/* Main Navbar - Modern Design */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-2 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3 md:py-4">
         <div className="w-full max-w-4xl mx-auto bg-black/90 backdrop-blur-md border border-white/10 rounded-[16px] sm:rounded-[20px] px-3 sm:px-4 md:px-6 lg:px-8 py-2.5 sm:py-3 md:py-4 flex justify-between items-center gap-2 sm:gap-4">
-          {/* Logo - Minimalist */}
+          {/* Logo */}
           <div
             className="group cursor-pointer flex-shrink-0"
             onClick={() => {
@@ -166,9 +167,11 @@ const Navbar = () => {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
-            <div className="text-base sm:text-lg md:text-xl font-medium text-white group-hover:text-white/80 transition-colors duration-300 truncate">
-              myPortfolio.
-            </div>
+            <img 
+              src={logo} 
+              alt="Logo" 
+              className="h-8 sm:h-9 md:h-10 w-auto object-contain group-hover:opacity-80 transition-opacity duration-300"
+            />
           </div>
 
           {/* Desktop Menu - Centered */}

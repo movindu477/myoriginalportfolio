@@ -10,6 +10,7 @@ import About from './components/About'
 import Projects from './components/Projects/Projects'
 import Contact from './components/Contact'
 import Tech from './components/Tech'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,7 @@ function App() {
             <Tech />
             <Projects />
             <Contact />
+            <ScrollToTop />
           </>
         } />
       </Routes>
