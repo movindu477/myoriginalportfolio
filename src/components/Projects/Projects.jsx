@@ -4,6 +4,7 @@ import image1 from '../../assets/1.png';
 import image2 from '../../assets/2.png';
 import image3 from '../../assets/3.png';
 import image4 from '../../assets/4.png';
+import image5 from '../../assets/5.png';
 
 const Projects = () => {
   const backgroundRef = useRef(null);
@@ -41,7 +42,7 @@ const Projects = () => {
       tech: ["React", "JavaScript"],
       liveDemo: "https://safarihub-main.vercel.app/",
       github: "https://github.com/movindu477/safarihub-main",
-      status: "Ongoing",
+      status: "Completed",
       image: image1,
     },
     {
@@ -73,6 +74,16 @@ const Projects = () => {
       github: "https://github.com/movindu477/Moley-s-Frontend-Interface",
       status: "Completed",
       image: image4,
+    },
+    {
+      id: 5,
+      title: "PetMart",
+      description: "A comprehensive PetMart e-commerce platform built with Laravel and PHP, featuring robust product management and a seamless shopping experience.",
+      tech: ["Laravel", "PHP"],
+      liveDemo: "https://web-production-de68aa.up.railway.app/",
+      github: "https://github.com/movindu477/SSPLaravel",
+      status: "Completed",
+      image: image5,
     },
   ];
 
