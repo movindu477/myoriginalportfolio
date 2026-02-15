@@ -146,7 +146,7 @@ const Projects = () => {
               className="animate-slideIn h-full"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <ProjectCard project={project} />
+              <ProjectCard project={project} showGithub={false} />
             </div>
           ))}
         </div>

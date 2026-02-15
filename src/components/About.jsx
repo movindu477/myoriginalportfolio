@@ -34,7 +34,7 @@ const About = () => {
 
     setTimeout(() => {
       animateCounter('projects', 11);
-      animateCounter('experience', 1);
+      animateCounter('experience', 2);
       animateCounter('technologies', 13);
       animateCounter('clients', 2);
     }, 500);
@@ -111,8 +111,8 @@ const About = () => {
             {/* Header Section */}
             <div
               className={`space-y-2 sm:space-y-3 transition-all duration-1000 ease-out ${mounted
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-10'
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-10'
                 }`}
             >
               <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-white leading-tight">
@@ -127,8 +127,8 @@ const About = () => {
             {/* About Content */}
             <div
               className={`space-y-3 sm:space-y-4 md:space-y-5 transition-all duration-1000 ease-out delay-200 ${mounted
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-10'
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-10'
                 }`}
             >
               <div className="backdrop-blur-sm bg-white/5 border border-white/10 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 shadow-xl w-full">
@@ -143,8 +143,8 @@ const About = () => {
               {/* Download Resume Button */}
               <div
                 className={`transition-all duration-1000 ease-out delay-300 ${mounted
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-10'
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-10'
                   }`}
               >
                 <a
@@ -162,8 +162,8 @@ const About = () => {
           {/* Stats Cards - Below Content on Mobile, Right Side on Desktop */}
           <div
             className={`grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 transition-all duration-1000 ease-out delay-200 order-2 lg:order-2 w-full ${mounted
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-10'
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-10'
               }`}
           >
             {stats.map((stat, index) => {

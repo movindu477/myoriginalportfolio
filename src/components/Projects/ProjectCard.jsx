@@ -1,7 +1,7 @@
 import React from 'react';
 import { Github } from 'lucide-react';
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, showGithub = true }) => {
   return (
     <div
       className="relative rounded-lg sm:rounded-xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm h-full flex flex-col cursor-pointer"
@@ -14,11 +14,10 @@ const ProjectCard = ({ project }) => {
           <div className="text-xs font-mono text-white/50">0{project.id}</div>
           <div className="flex items-center gap-2">
             {project.status && (
-              <span className={`text-xs font-medium px-2 py-0.5 rounded ${
-                project.status === 'Completed' 
-                  ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
-                  : 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
-              }`}>
+              <span className={`text-xs font-medium px-2 py-0.5 rounded ${project.status === 'Completed'
+                ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                : 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
+                }`}>
                 {project.status}
               </span>
             )}
@@ -29,8 +28,8 @@ const ProjectCard = ({ project }) => {
         {/* Project Image */}
         <div className="mb-3 sm:mb-4 rounded-lg overflow-hidden bg-white/5 aspect-video flex items-center justify-center border border-white/10">
           {project.image ? (
-            <img 
-              src={project.image} 
+            <img
+              src={project.image}
               alt={project.title}
               className="w-full h-full object-cover"
             />
@@ -86,7 +85,7 @@ const ProjectCard = ({ project }) => {
               Live Demo
             </button>
           )}
-          {project.github && (
+          {showGithub && project.github && (
             <button
               onClick={(e) => {
                 e.preventDefault();
