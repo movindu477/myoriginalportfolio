@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Download, CheckCircle, Briefcase, Layers, Code } from "lucide-react";
-import meImage from "../assets/profile.jpeg";
+import meImage from "../assets/about.png";
 import resumeFile from "../assets/Movindu_Weerabahu_Software_Engineer_Resume.pdf";
 
 const CountUp = ({ end, duration = 2000 }) => {
@@ -80,7 +80,7 @@ const About = () => {
               <img
                 src={meImage}
                 alt="Movindu Weerabahu"
-                className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-cover object-center transform hover:scale-110 transition-transform duration-500"
               />
             </div>
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import meImage from "../assets/me2.png";
+import meImage from "../assets/me3.png";
 import { ArrowUpRight, Github, Linkedin, Mail, Twitter } from "lucide-react";
 
 const ShuffleNumber = ({ end, duration = 2000 }) => {
@@ -46,23 +46,26 @@ const Hero = () => {
 
       {/* Orange Background Shape - Desktop (Right Side) */}
       {/* Orange Background Shape - Desktop (Right Side) & Image Container */}
-      <div className="hidden lg:flex absolute top-0 right-0 w-[45%] h-full bg-[#FF5400] rounded-bl-[400px] rounded-tl-[150px] z-0 translate-x-[5%] flex-col justify-end items-end overflow-hidden pb-0">
-        <img
-          src={meImage}
-          alt="Movindu Weerabahu"
-          className="h-[95%] w-auto object-contain z-10 drop-shadow-2xl scale-105 origin-bottom"
-          style={{
-            maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
-          }}
-        />
+      <div className="hidden lg:flex absolute top-0 right-0 w-[45%] h-full z-0 translate-x-[5%] flex-col justify-end items-end pb-0 pointer-events-none">
 
-        {/* Experience Card (Desktop - Inside Shape) */}
-        <div className="absolute top-[45%] left-20 z-0 bg-[#1A1A1A] text-white p-6 rounded-2xl shadow-2xl flex flex-col items-start min-w-[160px]">
+        {/* Orange Shape (Background) */}
+        <div className="absolute inset-0 bg-[#FF5400] rounded-bl-[400px] rounded-tl-[150px] z-0"></div>
+
+        {/* Experience Card (Middle Layer - Behind Image, In Front of Shape) */}
+        <div className="absolute top-[45%] -left-12 z-10 bg-[#1A1A1A] text-white p-6 rounded-2xl shadow-2xl flex flex-col items-start min-w-[160px] pointer-events-auto">
           <div className="flex flex-col gap-1">
-            <span className="text-2xl font-bold leading-tight text-white">"Code is Poetry."</span>
+            <span className="text-lg font-bold leading-tight text-white">"Turning Ideas into Reality."</span>
             <span className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">- Movindu W.</span>
           </div>
+        </div>
+
+        {/* Image Container (Front Layer - Clipped) */}
+        <div className="relative w-full h-full overflow-hidden flex flex-col justify-end items-end z-20 rounded-bl-[400px] rounded-tl-[150px]">
+          <img
+            src={meImage}
+            alt="Movindu Weerabahu"
+            className="h-full w-auto object-contain object-bottom drop-shadow-2xl scale-105 origin-bottom"
+          />
         </div>
       </div>
 
@@ -75,8 +78,7 @@ const Hero = () => {
             <img
               src={meImage}
               alt="Movindu Weerabahu"
-              className="w-full h-full object-cover object-top -translate-y-4 scale-110"
-              style={{ maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)' }}
+              className="w-full h-full object-contain object-bottom scale-125"
             />
           </div>
         </div>
