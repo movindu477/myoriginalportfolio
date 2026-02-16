@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, CheckCircle, ArrowRight } from 'lucide-react';
 import { InstagramLogoIcon } from '@phosphor-icons/react/dist/ssr';
 
 const Contact = () => {
@@ -18,8 +18,7 @@ const Contact = () => {
       ...prev,
       [name]: value
     }));
-    
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -30,21 +29,13 @@ const Contact = () => {
 
   const validateForm = () => {
     const newErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email';
     }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-    }
-
+    if (!formData.subject.trim()) newErrors.subject = 'Subject is required';
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     } else if (formData.message.trim().length < 10) {
@@ -57,23 +48,18 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!validateForm()) return;
 
-    // Show success animation
     setIsSubmitted(true);
-    
-    // Create WhatsApp message with form data
+
     const whatsappMessage = `Hello! I'm ${formData.name}.\n\nSubject: ${formData.subject}\n\nMessage: ${formData.message}\n\nEmail: ${formData.email}`;
-    const whatsappNumber = '94743090367'; // Sri Lanka country code +94
+    const whatsappNumber = '94743090367';
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-    
-    // Wait for animation to show, then open WhatsApp after 1.5 seconds
+
     setTimeout(() => {
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     }, 1500);
-    
-    // Reset form after showing success
+
     setTimeout(() => {
       setFormData({ name: '', email: '', subject: '', message: '' });
       setIsSubmitted(false);
@@ -81,359 +67,175 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'movinduweerabahu314@gmail.com',
-      href: 'mailto:movinduweerabahu314@gmail.com'
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '+94 74 309 0367',
-      href: 'tel:+94 74 309 0367'
-    },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'Colombo, Sri Lanka',
-      href: '#'
-    }
+    { icon: Mail, label: 'Email', value: 'movinduweerabahu314@gmail.com', href: 'mailto:movinduweerabahu314@gmail.com' },
+    { icon: Phone, label: 'Phone', value: '+94 74 309 0367', href: 'tel:+94 74 309 0367' },
+    { icon: MapPin, label: 'Location', value: 'Colombo, Sri Lanka', href: '#' }
   ];
 
   const socialLinks = [
-    {
-      icon: Github,
-      label: 'GitHub',
-      href: 'https://github.com/movindu477',
-      color: 'hover:text-gray-400'
-    },
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/movindu-weerabahu-75a6b6320/',
-      color: 'hover:text-blue-400'
-    },
-    {
-      icon: InstagramLogoIcon,
-      label: '',
-      href: 'https://www.instagram.com/itz.movi_jr/?utm_source=qr&igsh=MXhiMms0M2kwa3c5cg%3D%3D#',
-      color: 'hover:text-sky-400'
-    }
+    { icon: Github, label: 'GitHub', href: 'https://github.com/movindu477' },
+    { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/movindu-weerabahu-75a6b6320/' },
+    { icon: InstagramLogoIcon, label: 'Instagram', href: 'https://www.instagram.com/itz.movi_jr/' }
   ];
 
   return (
-    <section
-      id="contact"
-      className="w-full min-h-screen bg-black text-white relative overflow-hidden border-t border-white/10"
-    >
-      {/* Animated Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
-      
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-purple-500 rounded-full animate-float opacity-30"></div>
-        <div className="absolute top-3/4 left-3/4 w-1 h-1 bg-purple-400 rounded-full animate-float animation-delay-1000 opacity-20"></div>
-        <div className="absolute top-1/2 left-1/5 w-1.5 h-1.5 bg-purple-500 rounded-full animate-float animation-delay-2000 opacity-25"></div>
-      </div>
+    <section id="contact" className="w-full bg-black text-white py-24 px-4 sm:px-8 lg:px-16 relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none"></div>
 
-      {/* Glowing Orbs */}
-      <div className="absolute inset-0">
-        <div className="absolute -top-32 -left-32 w-64 h-64 bg-purple-600 rounded-full mix-blend-soft-light filter blur-[100px] opacity-10 animate-pulse"></div>
-        <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-purple-500 rounded-full mix-blend-soft-light filter blur-[100px] opacity-10 animate-pulse animation-delay-2000"></div>
-      </div>
+      {/* Glow Effect */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF5400] rounded-full filter blur-[150px] opacity-[0.05] pointer-events-none"></div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 sm:py-16 md:py-20 lg:py-24">
-        {/* Header Section */}
-        <div className="text-center mb-10 sm:mb-12 md:mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
-            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-purple-500 rounded-full animate-pulse"></div>
-            <span className="text-xs sm:text-sm font-medium text-white/70">GET IN TOUCH</span>
-            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-purple-500 rounded-full animate-pulse"></div>
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
+
+        {/* Left Side: Contact Info */}
+        <div className="flex flex-col justify-center order-2 lg:order-1">
+          <div className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full w-fit mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#FF5400] animate-pulse"></span>
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Get in Touch</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold mb-3 sm:mb-4 md:mb-6">
-            <span className="text-white">
-              Let's Work
-            </span>
-            <br />
-            <span className="text-purple-400">
-              Together
-            </span>
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-[1.1] mb-6 uppercase text-white">
+            Let's Work <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5400] to-orange-600">Together.</span>
           </h2>
 
-          <div className="w-16 sm:w-20 md:w-24 h-0.5 bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto mb-4 sm:mb-6 md:mb-8"></div>
-
-          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/60 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed font-light">
-            Ready to bring your ideas to life? Let's discuss how we can create something amazing together. 
-            I'm always open to new opportunities and collaborations.
+          <p className="text-gray-400 text-lg mb-12 max-w-md leading-relaxed">
+            Ready to bring your ideas to life? I'm always open to new opportunities and collaborations.
           </p>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 max-w-7xl mx-auto">
-          {/* Contact Information */}
-          <div className="space-y-6 sm:space-y-8">
-            <div>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-3 sm:mb-4 md:mb-6 text-white">
-                Let's Connect
-              </h3>
-              <p className="text-white/60 text-sm sm:text-base md:text-lg mb-6 sm:mb-8">
-                Feel free to reach out through any of these channels. I'll get back to you as soon as possible.
-              </p>
-            </div>
-
-            {/* Contact Details */}
-            <div className="space-y-4 sm:space-y-5 md:space-y-6">
-              {contactInfo.map((item, index) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-all duration-300 rounded-lg"
-                >
-                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-purple-500/20 border border-purple-500/30 flex items-center justify-center rounded-lg">
-                    <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-white/60 text-xs sm:text-sm font-medium">{item.label}</p>
-                    <p className="text-white text-sm sm:text-base md:text-lg font-semibold truncate">
-                      {item.value}
-                    </p>
-                  </div>
-                </a>
-              ))}
-            </div>
-
-            {/* Social Links */}
-            <div className="pt-4 sm:pt-6">
-              <p className="text-white/60 text-sm sm:text-base md:text-lg mb-3 sm:mb-4">Follow me on</p>
-              <div className="flex gap-3 sm:gap-4">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group w-10 h-10 sm:w-12 sm:h-12 border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:bg-white/10 hover:border-white/20 rounded-lg"
-                  >
-                    <social.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white/70 group-hover:text-purple-400 transition-colors duration-300" />
-                  </a>
-                ))}
-              </div>
-            </div>
+          <div className="space-y-8 mb-12">
+            {contactInfo.map((item, index) => (
+              <a key={index} href={item.href} className="flex items-center gap-4 sm:gap-6 group cursor-pointer p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white group-hover:bg-[#FF5400] transition-all duration-300 shadow-sm border border-white/5 shrink-0">
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">{item.label}</p>
+                  <p className="text-sm sm:text-lg font-bold text-white group-hover:text-[#FF5400] transition-colors break-all">{item.value}</p>
+                </div>
+              </a>
+            ))}
           </div>
 
-          {/* Contact Form */}
-          <div className="relative">
-            <div className="relative p-5 sm:p-6 md:p-8 lg:p-10 rounded-lg sm:rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm">
-              {/* Success Message Overlay */}
-              {isSubmitted && (
-                <div className="absolute inset-0 bg-black/90 backdrop-blur-md rounded-lg sm:rounded-xl flex items-center justify-center z-20 animate-fadeIn">
-                  <div className="text-center p-6 sm:p-8 animate-slideUp">
-                    <div className="relative mb-4 sm:mb-6">
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center animate-scaleIn">
-                        <CheckCircle className="w-8 h-8 sm:w-12 sm:h-12 text-white animate-checkMark" />
-                      </div>
-                      <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20"></div>
-                    </div>
-                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 animate-fadeInUp">Message Sent!</h3>
-                    <p className="text-white/70 text-sm sm:text-base md:text-lg mb-1 sm:mb-2 animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
-                      Your message is being sent to WhatsApp
-                    </p>
-                    <p className="text-white/50 text-xs sm:text-sm animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
-                      Opening WhatsApp...
-                    </p>
-                  </div>
-                </div>
-              )}
+          <div className="flex gap-4">
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-sm hover:shadow-lg bg-white/5"
+              >
+                <social.icon className="w-5 h-5" />
+              </a>
+            ))}
+          </div>
+        </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 md:space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-white/70 mb-1.5 sm:mb-2">
-                      Full Name *
-                    </label>
+        {/* Right Side: Modern Form */}
+        <div className="order-1 lg:order-2">
+          <div className="bg-[#111] p-8 md:p-10 rounded-[30px] border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-lg">
+
+            {/* Decorative blob */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF5400]/10 rounded-bl-[100px] -z-0"></div>
+
+            <div className="relative z-10">
+              <h3 className="text-2xl font-black uppercase mb-8 flex items-center gap-3 text-white">
+                Send a Message
+                <ArrowRight className="w-5 h-5 text-[#FF5400]" />
+              </h3>
+
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide ml-1">Your Name</label>
                     <input
                       type="text"
-                      id="name"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg border bg-white/5 backdrop-blur-sm text-white text-sm sm:text-base placeholder-white/40 transition-all duration-300 ${
-                        errors.name 
-                          ? 'border-red-500 focus:border-red-500' 
-                          : 'border-white/10 focus:border-purple-500'
-                      } focus:outline-none focus:ring-2 focus:ring-purple-500/20`}
-                      placeholder="Enter your full name"
+                      className={`w-full bg-[#1a1a1a] border ${errors.name ? 'border-red-500' : 'border-white/10 focus:border-[#FF5400]'} rounded-xl px-4 py-3.5 text-white outline-none transition-all placeholder:text-gray-600 font-medium`}
+                      placeholder="John Doe"
                     />
-                    {errors.name && (
-                      <p className="mt-1 text-xs sm:text-sm text-red-400">{errors.name}</p>
-                    )}
+                    {errors.name && <p className="text-red-500 text-xs ml-1 font-medium">{errors.name}</p>}
                   </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-white/70 mb-1.5 sm:mb-2">
-                      Email Address *
-                    </label>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide ml-1">Email Address</label>
                     <input
                       type="email"
-                      id="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg border bg-white/5 backdrop-blur-sm text-white text-sm sm:text-base placeholder-white/40 transition-all duration-300 ${
-                        errors.email 
-                          ? 'border-red-500 focus:border-red-500' 
-                          : 'border-white/10 focus:border-purple-500'
-                      } focus:outline-none focus:ring-2 focus:ring-purple-500/20`}
-                      placeholder="Enter your email"
+                      className={`w-full bg-[#1a1a1a] border ${errors.email ? 'border-red-500' : 'border-white/10 focus:border-[#FF5400]'} rounded-xl px-4 py-3.5 text-white outline-none transition-all placeholder:text-gray-600 font-medium`}
+                      placeholder="john@example.com"
                     />
-                    {errors.email && (
-                      <p className="mt-1 text-xs sm:text-sm text-red-400">{errors.email}</p>
-                    )}
+                    {errors.email && <p className="text-red-500 text-xs ml-1 font-medium">{errors.email}</p>}
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="subject" className="block text-xs sm:text-sm font-medium text-white/70 mb-1.5 sm:mb-2">
-                    Subject *
-                  </label>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-gray-500 uppercase tracking-wide ml-1">Subject</label>
                   <input
                     type="text"
-                    id="subject"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg border bg-white/5 backdrop-blur-sm text-white text-sm sm:text-base placeholder-white/40 transition-all duration-300 ${
-                      errors.subject 
-                        ? 'border-red-500 focus:border-red-500' 
-                        : 'border-white/10 focus:border-purple-500'
-                    } focus:outline-none focus:ring-2 focus:ring-purple-500/20`}
-                    placeholder="What's this about?"
+                    className={`w-full bg-[#1a1a1a] border ${errors.subject ? 'border-red-500' : 'border-white/10 focus:border-[#FF5400]'} rounded-xl px-4 py-3.5 text-white outline-none transition-all placeholder:text-gray-600 font-medium`}
+                    placeholder="Project Inquiry"
                   />
-                  {errors.subject && (
-                    <p className="mt-1 text-xs sm:text-sm text-red-400">{errors.subject}</p>
-                  )}
+                  {errors.subject && <p className="text-red-500 text-xs ml-1 font-medium">{errors.subject}</p>}
                 </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-white/70 mb-1.5 sm:mb-2">
-                    Message *
-                  </label>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-gray-500 uppercase tracking-wide ml-1">Message</label>
                   <textarea
-                    id="message"
                     name="message"
-                    rows="5"
+                    rows="4"
                     value={formData.message}
                     onChange={handleChange}
-                    className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg border bg-white/5 backdrop-blur-sm text-white text-sm sm:text-base placeholder-white/40 transition-all duration-300 resize-none ${
-                      errors.message 
-                        ? 'border-red-500 focus:border-red-500' 
-                        : 'border-white/10 focus:border-purple-500'
-                    } focus:outline-none focus:ring-2 focus:ring-purple-500/20`}
+                    className={`w-full bg-[#1a1a1a] border ${errors.message ? 'border-red-500' : 'border-white/10 focus:border-[#FF5400]'} rounded-xl px-4 py-3.5 text-white outline-none transition-all placeholder:text-gray-600 font-medium resize-none`}
                     placeholder="Tell me about your project..."
                   />
-                  {errors.message && (
-                    <p className="mt-1 text-xs sm:text-sm text-red-400">{errors.message}</p>
-                  )}
+                  {errors.message && <p className="text-red-500 text-xs ml-1 font-medium">{errors.message}</p>}
                 </div>
 
-                <div>
-                  <button
-                    type="submit"
-                    className="group relative w-full bg-white text-black hover:bg-white/90 font-medium text-sm sm:text-base py-2.5 sm:py-3 md:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 shadow-lg"
-                  >
-                    <div className="flex items-center justify-center gap-2 sm:gap-3">
-                      <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <button
+                  type="submit"
+                  disabled={isSubmitted}
+                  className="w-full bg-[#FF5400] text-white font-bold text-base uppercase tracking-wider py-4 rounded-xl hover:bg-[#ff6a22] transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 group shadow-xl shadow-orange-500/10"
+                >
+                  {isSubmitted ? (
+                    <>
+                      <CheckCircle className="w-5 h-5 animate-bounce" />
+                      <span>Message Sent!</span>
+                    </>
+                  ) : (
+                    <>
                       <span>Send Message</span>
-                    </div>
-                  </button>
-                </div>
+                      <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
+                </button>
               </form>
+            </div>
+
+            {/* Trust badge or extra info */}
+            <div className="mt-8 flex justify-center lg:justify-start gap-2 text-gray-500 text-xs font-medium uppercase tracking-widest pl-4">
+              <span>• Fast Response</span>
+              <span>• Secure</span>
             </div>
           </div>
         </div>
+
       </div>
 
-      {/* Footer */}
-      <div className="relative z-10 border-t border-white/10 mt-12 sm:mt-16 md:mt-20 pt-6 sm:pt-8 pb-4 sm:pb-6">
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center">
-          <p className="text-white/60 text-xs sm:text-sm">
-            © 2024 Movindu Weerabahu. All rights reserved.
-          </p>
-        </div>
+      {/* Modern Footer */}
+      <div className="mt-24 pt-8 border-t border-white/10 text-center">
+        <p className="text-gray-400 text-sm font-medium">
+          © 2026 Movindu Weerabahu. Made with <span className="text-[#FF5400]">Creativity</span>.
+        </p>
       </div>
-
-      {/* Success Animation Styles */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        @keyframes scaleIn {
-          from {
-            opacity: 0;
-            transform: scale(0.5);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-        @keyframes checkMark {
-          0% {
-            opacity: 0;
-            transform: scale(0) rotate(-45deg);
-          }
-          50% {
-            transform: scale(1.2) rotate(-45deg);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-        }
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out forwards;
-        }
-        .animate-slideUp {
-          animation: slideUp 0.5s ease-out forwards;
-        }
-        .animate-scaleIn {
-          animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-        .animate-checkMark {
-          animation: checkMark 0.6s ease-out forwards;
-          animation-delay: 0.2s;
-        }
-        .animate-fadeInUp {
-          animation: fadeInUp 0.5s ease-out forwards;
-          opacity: 0;
-        }
-      `}</style>
     </section>
   );
 };

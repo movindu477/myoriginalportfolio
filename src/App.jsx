@@ -10,7 +10,10 @@ import About from './components/About'
 import Projects from './components/Projects/Projects'
 import Contact from './components/Contact'
 import Tech from './components/Tech'
+import Experience from './components/Experience'
 import ScrollToTop from './components/ScrollToTop'
+
+import ServicesStrip from './components/ServicesStrip'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,8 +25,10 @@ function App() {
           <>
             <Navbar />
             <Hero />
+            <ServicesStrip />
             <About />
             <Tech />
+            <Experience />
             <Projects />
             <Contact />
             <ScrollToTop />
