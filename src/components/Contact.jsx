@@ -69,7 +69,7 @@ const Contact = () => {
   const contactInfo = [
     { icon: Mail, label: 'Email', value: 'movinduweerabahu314@gmail.com', href: 'mailto:movinduweerabahu314@gmail.com' },
     { icon: Phone, label: 'Phone', value: '+94 74 309 0367', href: 'tel:+94 74 309 0367' },
-    { icon: MapPin, label: 'Location', value: 'Colombo, Sri Lanka', href: '#' }
+    { icon: MapPin, label: 'Location', value: 'Kandana, Sri Lanka', href: '#' }
   ];
 
   const socialLinks = [
