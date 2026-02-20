@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Download, CheckCircle, Briefcase, Layers, Code } from "lucide-react";
 import meImage from "../assets/about.png";
-import resumeFile from "../assets/Movindu_Weerabahu_Software_Engineer_Resume.pdf";
+import resumeFile from "../assets/Movindus_CV.pdf";
 
 const CountUp = ({ end, duration = 2000 }) => {
   const [count, setCount] = useState(0);
