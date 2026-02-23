@@ -33,7 +33,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative w-full h-screen min-h-[600px] max-h-[1080px] overflow-hidden bg-[#0d0d0d] flex flex-col"
+      className="relative w-full h-[100dvh] overflow-hidden bg-[#0d0d0d] flex flex-col"
     >
 
       {/* ══════════════════════════════
@@ -54,7 +54,7 @@ const Hero = () => {
         <div
           className="absolute rounded-full -translate-y-1/2
                      left-1/2 -translate-x-1/2
-                     lg:left-[52%] lg:-translate-x-1/2
+                     lg:left-[70%] lg:-translate-x-1/2
                      top-[40%] md:top-[48%]
                      w-[300px] h-[300px]
                      sm:w-[440px] sm:h-[440px]
@@ -85,7 +85,7 @@ const Hero = () => {
 
       {/* ─── DESKTOP heading — z-10 so it sits BEHIND the z-20 image ─── */}
       <div className="hidden lg:flex absolute inset-0 z-10 pointer-events-none
-                      items-start justify-start
+                      flex-col items-start justify-start
                       pt-[110px]
                       pl-16 xl:pl-24">
         <h1 className="font-black leading-[0.86] tracking-tighter text-white uppercase select-none
@@ -95,6 +95,9 @@ const Hero = () => {
           <span className="text-[#FF5400]">IS</span><br />
           <span className="text-[#FF5400]">MOVINDU</span>
         </h1>
+        <p className="text-white/40 font-bold tracking-[0.22em] uppercase select-none mt-6 text-xs xl:text-sm whitespace-nowrap">
+          Full Stack Developer and Mobile Application Developer
+        </p>
       </div>
 
       {/* ─── LEFT PANEL (desktop) — social + CTA anchored bottom-left ─── */}
@@ -103,22 +106,7 @@ const Hero = () => {
                       pl-16 xl:pl-24 pb-4 xl:pb-6">
         <div className="flex flex-col items-start gap-5 pointer-events-auto">
 
-          {/* Social icons */}
-          <div className="flex items-center gap-3">
-            {/* LinkedIn */}
-            <SocialBtn href="https://www.linkedin.com/in/movindu-weerabahu/">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </SocialBtn>
 
-            {/* GitHub */}
-            <SocialBtn href="https://github.com/movindu477">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-              </svg>
-            </SocialBtn>
-          </div>
 
           {/* CTA Buttons */}
           <div className="flex items-center gap-3">
@@ -180,27 +168,23 @@ const Hero = () => {
       <div className="lg:hidden absolute inset-0 z-10 pointer-events-none
                       flex flex-col justify-start
                       px-5 sm:px-8
-                      pt-[88px] sm:pt-[100px]">
-        <h1 className="font-black leading-[0.88] tracking-tighter text-white uppercase select-none
+                      pt-[70px] sm:pt-[90px]">
+        <h1 className="font-black leading-[1.2] tracking-tighter text-white uppercase select-none
                        text-[2.6rem] sm:text-[4rem] md:text-[5.5rem]">
           MY NAME<br />
           <span className="text-[#FF5400]">IS</span><br />
           <span className="text-[#FF5400]">MOVINDU</span>
         </h1>
-        <p className="text-white/40 font-bold tracking-[0.25em] uppercase select-none
-                      mt-3 sm:mt-5 text-[9px] sm:text-[10px] md:text-xs">
-          Full Stack &amp; Mobile Application Developer
-        </p>
       </div>
 
       {/* Mobile person image */}
       <div className="lg:hidden absolute inset-0 z-20 flex items-end justify-center pointer-events-none
-                      pb-[22vh] sm:pb-[14vh] md:pb-0">
+                      pb-[16vh] sm:pb-[12vh] md:pb-0">
         <img
           src={meImage}
           alt="Movindu Weerabahu"
           className="w-auto select-none object-contain object-bottom
-                     h-[52vh] sm:h-[64vh] md:h-[76vh]"
+                     h-[58vh] sm:h-[70vh] md:h-[82vh]"
           style={{
             maskImage: "linear-gradient(to top, transparent 0%, black 20%)",
             WebkitMaskImage: "linear-gradient(to top, transparent 0%, black 20%)",
@@ -211,22 +195,13 @@ const Hero = () => {
       {/* Mobile bottom bar */}
       <div className="lg:hidden absolute bottom-0 left-0 right-0 z-30 px-5 sm:px-8">
 
-        {/* Social + CTA */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 pb-4 sm:pb-6">
+        {/* Center Slogan + CTA */}
+        <div className="flex flex-col items-center gap-6 pb-6 sm:pb-10">
 
-          {/* Social Icons */}
-          <div className="flex items-center gap-3">
-            <SocialBtn href="https://www.linkedin.com/in/movindu-weerabahu/">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </SocialBtn>
-            <SocialBtn href="https://github.com/movindu477">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-              </svg>
-            </SocialBtn>
-          </div>
+          <p className="text-white/40 font-bold tracking-[0.2em] uppercase select-none
+                        text-[9px] sm:text-[11px] md:text-xs leading-tight text-center max-w-[90%]">
+            Full Stack Developer and Mobile Application Developer
+          </p>
 
           {/* CTA */}
           <div className="flex items-center gap-3 shrink-0">
@@ -256,21 +231,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Skills strip */}
-        <div className="border-t border-white/[0.12] py-3.5 sm:py-5
-                        grid grid-cols-3 sm:grid-cols-5 gap-y-3 gap-x-2">
-          {skills.map((s) => (
-            <div key={s.num} className="flex items-center gap-1.5 cursor-default group">
-              <span className="font-black text-[#FF5400] italic leading-none text-[9px] sm:text-[10px]">
-                /{s.num}
-              </span>
-              <span className="text-white/45 group-hover:text-white transition-colors
-                               font-semibold tracking-wide text-[10px] sm:text-xs uppercase">
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </div>
+
       </div>
 
     </section>

@@ -1,73 +1,159 @@
+import React, { useState, useEffect, useRef } from "react";
+import { Briefcase, Calendar, MapPin, ExternalLink, ChevronRight, Trophy } from "lucide-react";
 import logo1 from '../assets/logo1.png';
 
 const Experience = () => {
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setIsVisible(true);
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        if (sectionRef.current) observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
+
     const experiences = [
         {
             id: 1,
             role: "Frontend Web Developer Intern",
             company: "Ceylon Innovation (PVT) LTD",
-            duration: "2025 - 2026",
+            location: "Negombo, Sri Lanka",
+            duration: "2025 - Present",
             logo: logo1,
+            description: "Leading the development of modern web interfaces using React and Tailwind CSS. Collaborating with cross-functional teams to deliver high-performance digital products.",
+            skills: ["React", "UI/UX", "Tailwind CSS", "Modern JS"]
         }
     ];
 
     return (
-        <section className="w-full bg-white py-20 px-4 sm:px-8 lg:px-16" id="experience">
-            <div className="max-w-[1000px] mx-auto flex flex-col gap-12">
-                {/* Header */}
-                <div className="text-center space-y-4">
-                    <div className="flex justify-center mb-2">
-                        {/* Decorative Icon */}
-                        <div className="relative">
-                            <div className="w-4 h-4 rounded-full bg-gray-200 border border-gray-400"></div>
-                            <div className="absolute -top-1 -right-1 w-6 h-6 border-t border-r border-gray-300 rounded-full opacity-50"></div>
+        <section
+            ref={sectionRef}
+            id="experience"
+            className="w-full bg-[#0d0d0d] py-24 sm:py-32 px-6 sm:px-12 lg:px-24 relative overflow-hidden"
+        >
+            {/* Background Texture & Glow */}
+            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-[#FF5400] opacity-[0.03] blur-[150px] rounded-full"></div>
+                <div className="absolute bottom-[20%] right-[-10%] w-[400px] h-[400px] bg-blue-600 opacity-[0.02] blur-[120px] rounded-full"></div>
+            </div>
+
+            <div className="max-w-7xl mx-auto relative z-10">
+
+                {/* Section Header */}
+                <div className={`mb-16 sm:mb-24 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="h-px w-10 sm:w-12 bg-[#FF5400]"></div>
+                        <span className="text-[#FF5400] font-black text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em]">My Journey</span>
+                    </div>
+                    <h2 className="text-3xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.1] sm:leading-tight uppercase tracking-tighter">
+                        Work <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40 italic">Experience</span>.
+                    </h2>
+                </div>
+
+                {/* Experience Timeline */}
+                <div className="relative">
+                    {/* Vertical Timeline Line */}
+                    <div className={`absolute left-0 sm:left-1/2 top-0 bottom-0 w-px bg-white/10 hidden sm:block transform -translate-x-1/2 transition-all duration-1000 delay-500 ${isVisible ? 'scale-y-100' : 'scale-y-0 origin-top'}`}></div>
+
+                    <div className="flex flex-col gap-12 sm:gap-24">
+                        {experiences.map((exp, idx) => (
+                            <div
+                                key={exp.id}
+                                className={`flex flex-col sm:flex-row items-center justify-between gap-8 sm:gap-0 relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
+                                style={{ transitionDelay: `${idx * 200 + 300}ms` }}
+                            >
+                                {/* Timeline Dot */}
+                                <div className="absolute left-0 sm:left-1/2 top-0 sm:top-1/2 w-4 h-4 bg-[#FF5400] rounded-full -translate-x-1/2 sm:-translate-y-1/2 hidden sm:flex items-center justify-center z-20 shadow-[0_0_20px_rgba(255,84,0,0.5)]">
+                                    <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                                </div>
+
+                                {/* Left Side (Content for Odds, Duration for Evens) */}
+                                <div className={`w-full sm:w-[42%] ${idx % 2 === 0 ? 'sm:text-right sm:order-1' : 'sm:text-left sm:order-2'}`}>
+                                    <div className={`group p-6 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] bg-white/[0.03] border border-white/10 hover:border-[#FF5400]/40 transition-all duration-500 relative overflow-hidden ${idx % 2 === 0 ? 'sm:rounded-tr-none' : 'sm:rounded-tl-none'}`}>
+                                        {/* Hover Glow */}
+                                        <div className="absolute -inset-1 bg-gradient-to-r from-[#FF5400]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+
+                                        <div className={`flex flex-col ${idx % 2 === 0 ? 'sm:items-end' : 'sm:items-start'} gap-4`}>
+                                            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white p-2 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
+                                                <img src={exp.logo} alt={exp.company} className="w-full h-full object-contain" />
+                                            </div>
+
+                                            <div>
+                                                <h3 className="text-lg sm:text-2xl font-black text-white uppercase tracking-tight leading-tight">{exp.role}</h3>
+                                                <p className="text-[#FF5400] font-bold text-xs sm:text-sm tracking-wide mt-1 uppercase">{exp.company}</p>
+                                            </div>
+
+                                            <div className={`flex flex-wrap gap-2 ${idx % 2 === 0 ? 'sm:justify-end' : 'justify-start'}`}>
+                                                <div className="flex items-center gap-1.5 text-white/40 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest">
+                                                    <MapPin className="w-3.5 h-3.5" />
+                                                    {exp.location}
+                                                </div>
+                                            </div>
+
+                                            <p className={`text-white/60 text-xs sm:text-sm leading-relaxed ${idx % 2 === 0 ? 'sm:text-right' : 'text-left'}`}>
+                                                {exp.description}
+                                            </p>
+                                            <div className={`flex flex-wrap gap-2 pt-2 ${idx % 2 === 0 ? 'sm:justify-end' : 'justify-start'}`}>
+                                                {exp.skills.map(skill => (
+                                                    <span key={skill} className="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold text-white/40 tracking-wider">
+                                                        {skill}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Right Side (Duration for Odds, Content for Evens) */}
+                                <div className={`w-full sm:w-[42%] flex ${idx % 2 === 0 ? 'justify-start order-2' : 'sm:justify-end order-1'} items-center`}>
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.02] text-white/20">
+                                            <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+                                        </div>
+                                        <div>
+                                            <span className="block text-xl sm:text-3xl font-black text-white italic tracking-tighter">{exp.duration}</span>
+                                            <span className="block text-[8px] sm:text-[10px] text-white/20 font-black uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-1">Timeline Period</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Achievement Badge (Bottom) */}
+                <div className={`mt-24 sm:mt-32 p-8 sm:p-12 rounded-[3rem] bg-gradient-to-br from-white/[0.05] to-transparent border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-8 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+                    <div className="flex items-center gap-6">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#FF5400] rounded-3xl flex items-center justify-center rotate-3 shadow-[0_0_30px_rgba(255,84,0,0.3)]">
+                            <Trophy className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+                        </div>
+                        <div>
+                            <h4 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tighter">Growth <span className="italic text-white/40">Mindset</span></h4>
+                            <p className="text-white/40 text-xs sm:text-sm font-medium mt-1">Always learning and pushing the boundaries of digital innovation.</p>
                         </div>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-bold text-black uppercase tracking-wide">Experience</h2>
-                    <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
-                        My professional journey and work history in the tech industry.
-                    </p>
+                    <button
+                        onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+                        className="group px-8 py-4 bg-white text-black font-black uppercase text-xs tracking-[0.2em] rounded-2xl hover:bg-[#FF5400] hover:text-white transition-all duration-500 flex items-center gap-3"
+                    >
+                        Start a Project
+                        <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </button>
                 </div>
 
-                {/* Experience List */}
-                <div className="flex flex-col gap-6">
-                    {experiences.map((exp) => (
-                        <div
-                            key={exp.id}
-                            className="group flex flex-col md:flex-row items-start md:items-center justify-between p-6 md:p-8 border cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:bg-[#FF5400] hover:border-[#FF5400] hover:shadow-lg hover:scale-[1.02]"
-                        >
-                            {/* Left Side: Logo & Info */}
-                            <div className="flex flex-col md:flex-row gap-6 md:items-center w-full">
-                                {/* Logo Box */}
-                                <div className="w-16 h-16 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center p-2.5 flex-shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:bg-white group-hover:shadow-md">
-                                    <img
-                                        src={exp.logo}
-                                        alt={exp.company}
-                                        className="w-full h-full object-contain"
-                                    />
-                                </div>
-
-                                {/* Role & Company */}
-                                <div className="flex flex-col">
-                                    <h3 className="text-xl md:text-2xl font-bold mb-1 transition-colors duration-300 text-black group-hover:text-white">
-                                        {exp.role}
-                                    </h3>
-                                    <span className="text-sm transition-colors duration-300 text-gray-500 group-hover:text-white/80">
-                                        {exp.company}
-                                    </span>
-                                </div>
-                            </div>
-
-                            {/* Right Side: Duration */}
-                            <div className="mt-4 md:mt-0 font-medium tracking-wide uppercase text-sm border-l-0 md:border-l-2 pl-0 md:pl-6 md:w-48 flex-shrink-0 transition-colors duration-300 text-black border-gray-200 group-hover:text-white group-hover:border-white/30">
-                                {exp.duration}
-                            </div>
-                        </div>
-                    ))}
-                </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
 export default Experience;

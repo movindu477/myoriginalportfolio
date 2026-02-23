@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Download, CheckCircle, Briefcase, Layers, Code } from "lucide-react";
+import { Download, CheckCircle, Briefcase, Layers, Code, Sparkles, ExternalLink, Globe, Smartphone, Database } from "lucide-react";
 import meImage from "../assets/about.png";
 import resumeFile from "../assets/Movindus_CV.pdf";
 
@@ -55,157 +55,156 @@ const About = () => {
     return () => observer.disconnect();
   }, []);
 
+  const expertise = [
+    {
+      title: "Web Development",
+      tags: ["React", "Laravel", "Node.js"],
+      icon: <Globe className="w-5 h-5" />,
+      color: "bg-blue-500/10 text-blue-500"
+    },
+    {
+      title: "Mobile Apps",
+      tags: ["Flutter", "Dart", "Firebase"],
+      icon: <Smartphone className="w-5 h-5" />,
+      color: "bg-[#FF5400]/10 text-[#FF5400]"
+    },
+    {
+      title: "Architecture",
+      tags: ["Clean Code", "Design Patterns"],
+      icon: <Layers className="w-5 h-5" />,
+      color: "bg-purple-500/10 text-purple-500"
+    }
+  ];
+
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="w-full bg-white py-20 px-4 sm:px-8 lg:px-16 flex justify-center items-center min-h-screen relative overflow-hidden"
+      className="w-full bg-[#0d0d0d] py-24 sm:py-32 px-6 sm:px-12 lg:px-24 flex justify-center items-center min-h-screen relative overflow-hidden"
     >
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none"></div>
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[10%] right-[5%] w-[400px] h-[400px] bg-[#FF5400] opacity-[0.03] blur-[120px] rounded-full"></div>
+        <div className="absolute bottom-[20%] left-[5%] w-[300px] h-[300px] bg-blue-500 opacity-[0.02] blur-[100px] rounded-full"></div>
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] contrast-150"></div>
+      </div>
 
-      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+      <div className="max-w-7xl w-full relative z-10">
 
-        {/* --- Left Column: Profile Card (Smaller width on LG) --- */}
-        <div
-          className={`lg:col-span-4 flex flex-col gap-6 transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-          style={{ transitionDelay: '0ms' }}
-        >
-          <div className="bg-neutral-50 rounded-2xl p-8 border border-neutral-100 shadow-xl shadow-black/5 flex flex-col items-center text-center h-full relative overflow-hidden group">
-
-            {/* Decorative Top Gradient */}
-            <div className="absolute top-0 left-0 w-full h-2 bg-[#FF5400] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-
-            <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-white shadow-xl mb-6 relative z-10">
-              <img
-                src={meImage}
-                alt="Movindu Weerabahu"
-                className="w-full h-full object-cover object-center transform hover:scale-110 transition-transform duration-500"
-              />
-            </div>
-
-            <h3 className="text-2xl font-bold text-black mb-1">Movindu Weerabahu</h3>
-            <div className="px-3 py-1 bg-neutral-100 rounded-full text-xs font-semibold text-neutral-500 mb-6 uppercase tracking-wider">
-              Software Engineer
-            </div>
-
-            <p className="text-neutral-500 text-sm mb-8 leading-relaxed max-w-xs mx-auto">
-              Crafting efficient and scalable digital solutions with a focus on user experience and performance.
-            </p>
-
-            <div className="mt-auto w-full space-y-3">
-              <a
-                href={resumeFile}
-                download="Movindu_Weerabahu_Resume.pdf"
-                className="w-full bg-black text-white py-3 rounded-xl font-bold text-sm tracking-wide hover:bg-[#FF5400] transition-colors flex items-center justify-center gap-2 group/btn"
-              >
-                <Download className="w-4 h-4 group-hover/btn:animate-bounce" />
-                Download CV
-              </a>
-              <div className="flex justify-center gap-4 text-neutral-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-neutral-300"></span>
-                <span className="w-1.5 h-1.5 rounded-full bg-neutral-300"></span>
-                <span className="w-1.5 h-1.5 rounded-full bg-neutral-300"></span>
-              </div>
-            </div>
+        {/* Header Section */}
+        <div className={`mb-12 sm:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-10 sm:w-12 bg-[#FF5400]"></div>
+            <span className="text-[#FF5400] font-black text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em]">My Identity</span>
           </div>
+          <h2 className="text-3xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.1] sm:leading-tight uppercase tracking-tighter">
+            Architecting <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40 italic">Digital</span><br />
+            Experiences.
+          </h2>
         </div>
 
-        {/* --- Right Column: Content (Wider) --- */}
-        <div
-          className={`lg:col-span-8 flex flex-col gap-6 transform transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-          style={{ transitionDelay: '200ms' }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
-          {/* About Content Box */}
-          <div className="bg-neutral-50 rounded-2xl p-8 sm:p-10 border border-neutral-100 shadow-xl shadow-black/5 relative overflow-hidden group">
-            {/* Hover Glow Effect */}
-            <div className="absolute -right-20 -top-20 w-64 h-64 bg-[#FF5400] opacity-[0.03] blur-3xl rounded-full pointer-events-none group-hover:opacity-[0.08] transition-opacity duration-500"></div>
+          {/* LEFT: Image & Status */}
+          <div className={`lg:col-span-5 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+            <div className="relative group">
+              {/* Image Frame */}
+              <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl z-10 bg-neutral-900 aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
+                <img
+                  src={meImage}
+                  alt="Movindu"
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+                />
 
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-              <div>
-                <p className="text-[#FF5400] font-bold text-xs uppercase tracking-widest mb-2">My Story</p>
-                <h2 className="text-3xl sm:text-4xl font-black text-black uppercase">About Me</h2>
+                {/* Floating Status Badge */}
+                <div className="absolute bottom-6 left-6 right-6 p-4 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+                    <span className="text-white text-[10px] font-black uppercase tracking-widest leading-none">Available for Work</span>
+                  </div>
+                  <Sparkles className="w-4 h-4 text-[#FF5400]" />
+                </div>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-green-50 rounded-lg border border-green-100">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-                </span>
-                <span className="text-xs font-bold text-green-700 uppercase tracking-wide">Available for hire</span>
-              </div>
+
+              {/* Back Decorative Elements */}
+              <div className="absolute -inset-4 border border-white/5 rounded-[40px] -z-10 group-hover:scale-105 transition-transform duration-700"></div>
+              <div className="absolute -top-12 -left-12 text-[12rem] font-black text-white/[0.02] select-none pointer-events-none italic">01</div>
             </div>
 
-            <div className="space-y-6 text-neutral-600 leading-relaxed text-[15px] sm:text-base">
-              <p>
-                I am a results-driven <span className="font-bold text-black border-b-2 border-[#FF5400]/20">Full-Stack Developer</span> and <span className="font-bold text-black border-b-2 border-[#FF5400]/20">Flutter Specialist</span> dedicated to building high-quality web and mobile applications. My journey involves translating complex requirements into seamless, user-centric digital experiences.
-              </p>
-              <p>
-                With a strong foundation in modern frameworks like React, Laravel, and Flutter, I focus on writing clean, maintainable code. I thrive in dynamic environments where I can leverage my problem-solving skills to overcome technical challenges and deliver impactful solutions.
-              </p>
-            </div>
+            {/* Resume Button */}
+            <a
+              href={resumeFile}
+              download="Movindu_Weerabahu_Resume.pdf"
+              className="mt-6 sm:mt-8 group relative flex items-center justify-between p-5 sm:p-6 bg-white/[0.03] border border-white/10 rounded-2xl hover:bg-[#FF5400] transition-all duration-500"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white flex items-center justify-center rounded-xl group-hover:scale-90 transition-transform duration-500">
+                  <Download className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
+                </div>
+                <div>
+                  <span className="block text-white font-black uppercase text-xs sm:text-sm tracking-widest transition-colors duration-500 group-hover:text-white">Download CV</span>
+                  <span className="block text-white/40 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest group-hover:text-white/80">Latest Version (PDF)</span>
+                </div>
+              </div>
+              <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-white/20 group-hover:text-white transition-colors" />
+            </a>
           </div>
 
-          {/* Bottom Grid: Stats & Roles */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* RIGHT: Content & Stats */}
+          <div className="lg:col-span-7 flex flex-col gap-12 sm:gap-16">
 
-            {/* Stats Box */}
-            <div className="bg-[#1A1A1A] rounded-2xl p-8 text-white relative overflow-hidden flex flex-col justify-between group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF5400] opacity-10 blur-3xl rounded-full"></div>
+            {/* Biography */}
+            <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+              <p className="text-white/60 text-lg sm:text-xl leading-relaxed font-medium mb-8">
+                I am a results-driven <span className="text-white font-bold">Full-Stack Developer</span> and <span className="text-white font-bold italic">Flutter Specialist</span> based in Colombo. My work is defined by the intersection of performance, design, and scalability.
+              </p>
 
-              <div className="mb-6">
-                <h4 className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Total Experience</h4>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-black text-[#FF5400]">
-                    <CountUp end={2} />+
-                  </span>
-                  <span className="text-xl font-bold">Years</span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4 py-10 sm:py-12 border-y border-white/5 text-center sm:text-left">
+                <div className="flex flex-col gap-1 sm:gap-2">
+                  <span className="text-4xl sm:text-5xl font-black text-white italic leading-none"><CountUp end={2} />+</span>
+                  <span className="text-[9px] sm:text-[10px] text-white/30 uppercase font-black tracking-[0.2em] sm:tracking-[0.3em]">Years XP</span>
                 </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 border-t border-white/10 pt-6 mt-2">
-                <div>
-                  <h5 className="text-2xl font-bold">
-                    <CountUp end={12} />+
-                  </h5>
-                  <p className="text-[10px] text-gray-500 uppercase tracking-wider">Projects</p>
+                <div className="flex flex-col gap-1 sm:gap-2">
+                  <span className="text-4xl sm:text-5xl font-black text-[#FF5400] leading-none"><CountUp end={12} />+</span>
+                  <span className="text-[9px] sm:text-[10px] text-white/30 uppercase font-black tracking-[0.2em] sm:tracking-[0.3em]">Built Projects</span>
                 </div>
-                <div>
-                  <h5 className="text-2xl font-bold">
-                    <CountUp end={5} />+
-                  </h5>
-                  <p className="text-[10px] text-gray-500 uppercase tracking-wider">Clients</p>
+                <div className="flex flex-col gap-1 sm:gap-2">
+                  <span className="text-4xl sm:text-5xl font-black text-white tracking-tighter leading-none"><CountUp end={99} />%</span>
+                  <span className="text-[9px] sm:text-[10px] text-white/30 uppercase font-black tracking-[0.2em] sm:tracking-[0.3em]">Client Satisfaction</span>
                 </div>
               </div>
             </div>
 
-            {/* Expertise Box */}
-            <div className="bg-white rounded-2xl p-8 border border-neutral-100 shadow-xl shadow-black/5 flex flex-col gap-4">
-              <h4 className="text-black text-xs font-bold uppercase tracking-widest mb-2">Core Expertise</h4>
+            {/* Expertise Grid */}
+            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+              {expertise.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="group p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-[#FF5400]/40 hover:bg-white/[0.05] transition-all duration-500"
+                >
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 ${item.color} rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:scale-110 transition-transform duration-500`}>
+                    {item.icon}
+                  </div>
+                  <h4 className="text-white font-black uppercase tracking-widest mb-3 text-xs sm:text-sm">{item.title}</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {item.tags.map(tag => (
+                      <span key={tag} className="px-2.5 py-1 bg-white/5 rounded-full text-[9px] sm:text-[10px] font-bold text-white/40 tracking-wider transition-colors duration-500 group-hover:text-white/80 group-hover:bg-white/10">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
 
-              <div className="flex items-center gap-4 p-3 bg-neutral-50 rounded-xl border border-neutral-100 hover:border-[#FF5400]/30 transition-colors group/item cursor-default">
-                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm text-[#FF5400] group-hover/item:scale-110 transition-transform">
-                  <Code className="w-5 h-5" />
-                </div>
-                <div>
-                  <h5 className="font-bold text-sm text-black">Web Development</h5>
-                  <p className="text-[10px] text-neutral-500">React, Laravel, Node</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 p-3 bg-neutral-50 rounded-xl border border-neutral-100 hover:border-[#FF5400]/30 transition-colors group/item cursor-default">
-                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm text-black group-hover/item:scale-110 transition-transform">
-                  <Layers className="w-5 h-5" />
-                </div>
-                <div>
-                  <h5 className="font-bold text-sm text-black">Mobile Apps</h5>
-                  <p className="text-[10px] text-neutral-500">Flutter, iOS, Android</p>
-                </div>
+              {/* Dynamic Quote Box */}
+              <div className="p-8 rounded-3xl bg-[#FF5400] flex flex-col justify-center gap-4 relative overflow-hidden group">
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/20 blur-[60px] rounded-full group-hover:scale-150 transition-transform duration-[2s]"></div>
+                <Briefcase className="w-8 h-8 text-white mb-2" />
+                <p className="text-white font-black text-lg leading-tight uppercase tracking-tight italic">
+                  "Turning complex code into simple, elegant digital products."
+                </p>
               </div>
             </div>
 
           </div>
-
         </div>
       </div>
     </section>
