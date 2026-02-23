@@ -158,11 +158,9 @@ const Navbar = () => {
     <>
       {/* Main Navbar - Minimalist Design */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4 sm:py-6'}`}>
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex justify-end lg:justify-start items-center gap-16">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex justify-end items-center">
 
-
-
-          {/* Desktop Menu - Right Aligned with Subtitles */}
+          {/* Desktop Menu - right side */}
           <ul className="hidden lg:flex items-start gap-12 xl:gap-16">
             {/* My Projects */}
             <li className="group cursor-pointer">
@@ -172,13 +170,13 @@ const Navbar = () => {
                 className="block"
               >
                 <div className="flex items-center gap-1">
-                  <span className="text-sm font-bold text-black group-hover:text-[#FF5400] transition-colors">My Projects</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-black group-hover:text-[#FF5400] transition-colors" />
+                  <span className={`text-sm font-bold group-hover:text-[#FF5400] transition-colors ${scrolled ? 'text-black' : 'text-white'}`}>My Projects</span>
+                  <ArrowUpRight className={`w-3.5 h-3.5 group-hover:text-[#FF5400] transition-colors ${scrolled ? 'text-black' : 'text-white'}`} />
                 </div>
-                <span className="text-[9px] text-gray-500 block leading-tight mt-1 max-w-[100px] group-hover:text-[#FF9B50] transition-colors">
+                <span className={`text-[9px] block leading-tight mt-1 max-w-[100px] group-hover:text-[#FF9B50] transition-colors ${scrolled ? 'text-gray-500' : 'text-white/45'}`}>
                   See all of nice project i have done
                 </span>
-                <div className="w-full h-px bg-gray-300 mt-2 group-hover:bg-[#FF5400] transition-colors"></div>
+                <div className={`w-full h-px mt-2 group-hover:bg-[#FF5400] transition-colors ${scrolled ? 'bg-gray-300' : 'bg-white/25'}`}></div>
               </a>
             </li>
 
@@ -190,13 +188,13 @@ const Navbar = () => {
                 className="block"
               >
                 <div className="flex items-center gap-1">
-                  <span className="text-sm font-bold text-black group-hover:text-[#FF5400] transition-colors">About Me</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-black group-hover:text-[#FF5400] transition-colors" />
+                  <span className={`text-sm font-bold group-hover:text-[#FF5400] transition-colors ${scrolled ? 'text-black' : 'text-white'}`}>About Me</span>
+                  <ArrowUpRight className={`w-3.5 h-3.5 group-hover:text-[#FF5400] transition-colors ${scrolled ? 'text-black' : 'text-white'}`} />
                 </div>
-                <span className="text-[9px] text-gray-500 block leading-tight mt-1 max-w-[80px] group-hover:text-[#FF9B50] transition-colors">
+                <span className={`text-[9px] block leading-tight mt-1 max-w-[80px] group-hover:text-[#FF9B50] transition-colors ${scrolled ? 'text-gray-500' : 'text-white/45'}`}>
                   Learn about my self what i do
                 </span>
-                <div className="w-full h-px bg-gray-300 mt-2 group-hover:bg-[#FF5400] transition-colors"></div>
+                <div className={`w-full h-px mt-2 group-hover:bg-[#FF5400] transition-colors ${scrolled ? 'bg-gray-300' : 'bg-white/25'}`}></div>
               </a>
             </li>
 
@@ -208,13 +206,13 @@ const Navbar = () => {
                 className="block"
               >
                 <div className="flex items-center gap-1">
-                  <span className="text-sm font-bold text-black group-hover:text-[#FF5400] transition-colors">Experience</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-black group-hover:text-[#FF5400] transition-colors" />
+                  <span className={`text-sm font-bold group-hover:text-[#FF5400] transition-colors ${scrolled ? 'text-black' : 'text-white'}`}>Experience</span>
+                  <ArrowUpRight className={`w-3.5 h-3.5 group-hover:text-[#FF5400] transition-colors ${scrolled ? 'text-black' : 'text-white'}`} />
                 </div>
-                <span className="text-[9px] text-gray-500 block leading-tight mt-1 max-w-[80px] group-hover:text-[#FF9B50] transition-colors">
+                <span className={`text-[9px] block leading-tight mt-1 max-w-[80px] group-hover:text-[#FF9B50] transition-colors ${scrolled ? 'text-gray-500' : 'text-white/45'}`}>
                   My professional journey
                 </span>
-                <div className="w-full h-px bg-gray-300 mt-2 group-hover:bg-[#FF5400] transition-colors"></div>
+                <div className={`w-full h-px mt-2 group-hover:bg-[#FF5400] transition-colors ${scrolled ? 'bg-gray-300' : 'bg-white/25'}`}></div>
               </a>
             </li>
 
@@ -226,20 +224,20 @@ const Navbar = () => {
                 className="block"
               >
                 <div className="flex items-center gap-1">
-                  <span className="text-sm font-bold text-black group-hover:text-[#FF5400] transition-colors">Contact me</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-black group-hover:text-[#FF5400] transition-colors" />
+                  <span className={`text-sm font-bold group-hover:text-[#FF5400] transition-colors ${scrolled ? 'text-black' : 'text-white'}`}>Contact me</span>
+                  <ArrowUpRight className={`w-3.5 h-3.5 group-hover:text-[#FF5400] transition-colors ${scrolled ? 'text-black' : 'text-white'}`} />
                 </div>
-                <span className="text-[9px] text-gray-500 block leading-tight mt-1 group-hover:text-[#FF9B50] transition-colors">
+                <span className={`text-[9px] block leading-tight mt-1 group-hover:text-[#FF9B50] transition-colors ${scrolled ? 'text-gray-500' : 'text-white/45'}`}>
                   movinduweerabahu314@gmail.com
                 </span>
-                <div className="w-full h-px bg-gray-300 mt-2 group-hover:bg-[#FF5400] transition-colors"></div>
+                <div className={`w-full h-px mt-2 group-hover:bg-[#FF5400] transition-colors ${scrolled ? 'bg-gray-300' : 'bg-white/25'}`}></div>
               </a>
             </li>
           </ul>
 
           {/* Mobile Menu Button - Simple Black */}
           <button
-            className="lg:hidden relative z-50 p-2 text-black hover:text-[#FF5400] transition-colors"
+            className={`lg:hidden relative z-50 p-2 transition-colors hover:text-[#FF5400] ${scrolled ? 'text-black' : 'text-white'}`}
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
