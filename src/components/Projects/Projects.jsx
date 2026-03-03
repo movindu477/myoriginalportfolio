@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUpRight, Sparkles, ExternalLink, Github, Monitor, Smartphone, Code2, ShoppingBag } from 'lucide-react';
 import image1 from '../../assets/1.png';
-import image2 from '../../assets/2.png';
 import image3 from '../../assets/3.png';
 import image4 from '../../assets/4.png';
 import image5 from '../../assets/5.png';
@@ -149,16 +148,6 @@ const Projects = () => {
     },
     {
       id: 2,
-      title: "SEDEK Caritas",
-      description: "An organizational management system designed for SEDEK National Center. Focused on optimizing resource allocation and project tracking across multiple regions.",
-      tech: ["HTML5", "CSS3", "JavaScript", "Vercel"],
-      category: "Web App",
-      liveDemo: "https://sedek-caritas-web-site.vercel.app/",
-      github: "https://github.com/movindu477/SEDEK-CARITAS-WebSite",
-      image: image2,
-    },
-    {
-      id: 3,
       title: "SFDS Church",
       description: "Modern community-driven platform for St. Francis De Sales Church. Built with engagement in mind, featuring live events, donations, and media galleries.",
       tech: ["Vite", "JS", "Tailwind", "Framer"],
@@ -168,7 +157,7 @@ const Projects = () => {
       image: image3,
     },
     {
-      id: 4,
+      id: 3,
       title: "Moley UI",
       description: "Experimental design system and interface playground. Explores advanced animations, glassmorphism principles, and fluid modern layouts.",
       tech: ["React", "CSS Modules", "GSAP"],
@@ -178,7 +167,7 @@ const Projects = () => {
       image: image4,
     },
     {
-      id: 5,
+      id: 4,
       title: "PetMart Web",
       description: "Scalable e-commerce infrastructure for pet supplies. Implements advanced filtering, cart synchronization, and administrative dashboarding with Laravel.",
       tech: ["Laravel", "PHP", "MySQL", "Blade"],
@@ -188,7 +177,7 @@ const Projects = () => {
       image: image5,
     },
     {
-      id: 6,
+      id: 5,
       title: "PetMart Mobile",
       description: "Full-feature mobile commerce application. Leverages Flutter's native performance to provide a smooth, fast, and secure user experience forpet owners.",
       tech: ["Flutter", "Dart", "Provider", "Firebase"],
