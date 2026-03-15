@@ -25,7 +25,7 @@ const Experience = () => {
     const experiences = [
         {
             id: 1,
-            role: "Frontend Web Developer Intern",
+            role: "Full Stack Web Developer Intern",
             company: "Ceylon Innovation (PVT) LTD",
             location: "Negombo, Sri Lanka",
             duration: "2025 - Present",
