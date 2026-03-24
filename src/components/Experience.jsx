@@ -28,7 +28,7 @@ const Experience = () => {
             role: "Full Stack Web Developer Intern",
             company: "Ceylon Innovation (PVT) LTD",
             location: "Negombo, Sri Lanka",
-            duration: "2025 - Present",
+            duration: "2025 - 2025 (6 months)",
             logo: logo1,
             description: "Leading the development of modern web interfaces using React and Tailwind CSS. Collaborating with cross-functional teams to deliver high-performance digital products.",
             skills: ["React", "UI/UX", "Tailwind CSS", "Modern JS"]
