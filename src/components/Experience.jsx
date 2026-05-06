@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Briefcase, Calendar, MapPin, ExternalLink, ChevronRight, Trophy } from "lucide-react";
 import logo1 from '../assets/logo1.png';
+import logo2 from '../assets/logo2.jpg';
 
 const Experience = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -32,6 +33,26 @@ const Experience = () => {
             logo: logo1,
             description: "Leading the development of modern web interfaces using React and Tailwind CSS. Collaborating with cross-functional teams to deliver high-performance digital products.",
             skills: ["React", "UI/UX", "Tailwind CSS", "Modern JS"]
+        },
+        {
+            id: 2,
+            role: "Full Stack developer and Mobile application developer",
+            company: "Ceylon Innovation (PVT) LTD",
+            location: "Negombo, Sri Lanka",
+            duration: "2025 - 2025",
+            logo: logo1,
+            description: "Built responsive full-stack applications using React.js, Laravel, and Flutter. Integrated RESTful APIs with JWT/OAuth authentication and managed MySQL/Firebase backends for seamless real-time data handling.",
+            skills: ["React.js", "Laravel", "Flutter", "Firebase", "MySQL"]
+        },
+        {
+            id: 3,
+            role: "IT Tech team Intern",
+            company: "APIIT (Asia Pacific Insitiute Information Technology)",
+            location: "Colombo, Sri Lanka",
+            duration: "2026-pursuing",
+            logo: logo2,
+            description: "Managing IT infrastructure and providing technical support for hardware, software, and network systems. Assisting in system maintenance and troubleshooting to ensure seamless operations within the institute's tech environment.",
+            skills: ["IT Support", "Networking", "Troubleshooting", "System Maintenance"]
         }
     ];
 
