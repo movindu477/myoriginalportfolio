@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Download, CheckCircle, Briefcase, Layers, Code, Sparkles, ExternalLink, Globe, Smartphone, Database } from "lucide-react";
-import meImage from "../assets/about.jpg";
+import meImage from "../assets/about.JPG";
 import resumeFile from "../assets/Movindus_CV.pdf";
 
 const CountUp = ({ end, duration = 2000 }) => {
