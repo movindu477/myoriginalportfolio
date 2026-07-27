@@ -1,57 +1,95 @@
-import React, { useState } from 'react';
-import { Github, ExternalLink, ArrowUpRight } from 'lucide-react';
+import React from 'react';
+import { ExternalLink, Github, Monitor, Smartphone, Code2, ShoppingBag } from 'lucide-react';
+
+const getIcon = (category) => {
+  switch (category) {
+    case 'Full Stack': return <Code2 className="w-3.5 h-3.5" />;
+    case 'Mobile App': return <Smartphone className="w-3.5 h-3.5" />;
+    case 'E-Commerce': return <ShoppingBag className="w-3.5 h-3.5" />;
+    default: return <Monitor className="w-3.5 h-3.5" />;
+  }
+};
 
 const ProjectCard = ({ project }) => {
-  const [isActive, setIsActive] = useState(false);
-
   return (
-    <div
-      className="group flex flex-col gap-4 cursor-pointer"
-      onClick={() => setIsActive(!isActive)}
-    >
-      {/* Image Container */}
-      <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-gray-100 shadow-sm border border-gray-200">
+    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#161616] shadow-xl flex flex-col justify-between transition-all duration-500 hover:border-[#FF5400]/50 hover:shadow-2xl hover:shadow-orange-500/10">
+      {/* Image Box Container (100% Opacity, Proper Object Fit) */}
+      <div className="relative w-full aspect-[16/11] bg-[#1c1c1f] p-4 flex items-center justify-center overflow-hidden">
         {project.image ? (
           <img
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500 ease-out opacity-100"
           />
         ) : (
-          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-            <span className="text-gray-400 text-sm font-medium">No Preview</span>
+          <div className="w-full h-full flex items-center justify-center text-white/30 text-xs font-medium">
+            No Preview
           </div>
         )}
 
-        <div className={`absolute inset-0 bg-black/40 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-          <a
-            href={project.liveDemo || project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`w-16 h-16 rounded-full bg-white flex items-center justify-center transform transition-all duration-300 text-black shadow-xl hover:bg-[#FF5400] hover:text-white hover:scale-110 ${isActive ? 'scale-100' : 'scale-50 group-hover:scale-100'}`}
-            onClick={(e) => e.stopPropagation()}
-            title={project.liveDemo ? "View Live Site" : "View Code"}
-          >
-            <ArrowUpRight className="w-6 h-6" />
-          </a>
-
-          {/* Corner labels on hover */}
-          <div className={`absolute bottom-6 left-6 text-xs text-white font-medium transition-transform duration-300 delay-75 ${isActive ? 'translate-y-0' : 'translate-y-4 group-hover:translate-y-0'}`}>
-            {project.tech ? project.tech[0] : 'Project'}
+        {/* Category Badge */}
+        {project.category && (
+          <div className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1 bg-black/80 backdrop-blur-md border border-white/15 rounded-full text-white/90">
+            <span className="text-[#FF5400]">{getIcon(project.category)}</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest">{project.category}</span>
           </div>
-          <div className={`absolute bottom-6 right-6 text-xs text-white font-medium transition-transform duration-300 delay-100 ${isActive ? 'translate-y-0' : 'translate-y-4 group-hover:translate-y-0'}`}>
-            {project.liveDemo ? 'Visit Site' : 'View Code'}
-          </div>
-        </div>
+        )}
       </div>
 
-      {/* Minimal Text Content Below */}
-      <div className="flex items-center justify-between px-1">
-        <h3 className="text-xl font-bold text-black group-hover:text-[#FF5400] transition-colors">
-          {project.title}
-        </h3>
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-500 font-medium">{project.status || "Development"}</span>
+      {/* Bottom Translucent Dark Overlay Banner */}
+      <div className="p-6 bg-black/80 backdrop-blur-md border-t border-white/10 flex flex-col justify-between flex-1">
+        <div>
+          <div className="flex items-baseline gap-3 mb-2">
+            <span className="text-3xl font-black text-white/40 group-hover:text-[#FF5400] transition-colors tracking-tighter">
+              0{project.id}
+            </span>
+            <h3 className="text-xl font-black text-white uppercase tracking-tight">
+              {project.title}
+            </h3>
+          </div>
+
+          <p className="text-xs text-white/60 font-medium leading-relaxed line-clamp-3 mb-4">
+            {project.description}
+          </p>
+        </div>
+
+        {/* Action Row */}
+        <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+          <div className="flex flex-wrap gap-1.5 max-w-[65%]">
+            {project.tech && project.tech.map((t) => (
+              <span
+                key={t}
+                className="px-2 py-0.5 bg-white/5 border border-white/10 rounded text-[10px] font-semibold text-white/70"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            {project.liveDemo && (
+              <a
+                href={project.liveDemo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-[#FF5400] hover:bg-orange-500 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg shadow-orange-500/20"
+                title="Live Demo"
+              >
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-white hover:text-black text-white border border-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
+                title="GitHub Repository"
+              >
+                <Github className="w-4 h-4" />
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>
