@@ -1,29 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ExternalLink, Github, Monitor, Smartphone, Code2, ShoppingBag } from 'lucide-react';
-import image1 from '../../assets/1.png';
 import image3 from '../../assets/3.png';
 import image4 from '../../assets/4.png';
-import image5 from '../../assets/5.png';
-import image6 from '../../assets/6.png';
+import image7 from '../../assets/7.png';
 
 const projects = [
   {
     id: 1,
     index: "01",
-    title: "SafariHub",
-    description: "A premium tourism booking engine tailored for Sri Lanka. Features seamless scheduling, secure payments, and a dynamic real-time inventory management backend.",
-    tech: ["React.js", "Node.js", "Express", "MongoDB"],
-    category: "Full Stack",
-    liveDemo: "https://safarihub-main.vercel.app/",
-    github: "https://github.com/movindu477/safarihub-main",
-    image: image1,
+    title: "APIIT Graduation Website",
+    description: "Official graduation registration and ceremony management portal for APIIT Sri Lanka — Class of 2026 (Updatable). Built with React. Covers student registration, guest invitations, kit collection, payments, and alumni onboarding.",
+    category: "Website",
+    liveDemo: "https://graduation.apiit.lk/",
+    github: "",
+    image: image7,
   },
   {
     id: 2,
     index: "02",
     title: "SFDS Church",
     description: "Modern community-driven platform for St. Francis De Sales Church. Built with engagement in mind, featuring live events, donations, and media galleries.",
-    tech: ["Vite", "JS", "Tailwind", "Framer"],
     category: "Website",
     liveDemo: "https://movindu477.github.io/ST.-Francis-De-Sales-Church-Site/",
     github: "https://github.com/movindu477/ST.-Francis-De-Sales-Church-Site",
@@ -34,33 +30,10 @@ const projects = [
     index: "03",
     title: "Moley UI",
     description: "Experimental design system and interface playground. Explores advanced animations, glassmorphism principles, and fluid modern layouts.",
-    tech: ["React", "CSS Modules", "GSAP"],
     category: "Interface",
     liveDemo: "",
     github: "https://github.com/movindu477/Moley-s-Frontend-Interface",
     image: image4,
-  },
-  {
-    id: 4,
-    index: "04",
-    title: "PetMart Web",
-    description: "Scalable e-commerce infrastructure for pet supplies. Implements advanced filtering, cart synchronization, and administrative dashboarding with Laravel.",
-    tech: ["Laravel", "PHP", "MySQL", "Blade"],
-    category: "E-Commerce",
-    liveDemo: "https://web-production-de68aa.up.railway.app/",
-    github: "https://github.com/movindu477/SSPLaravel",
-    image: image5,
-  },
-  {
-    id: 5,
-    index: "05",
-    title: "PetMart Mobile",
-    description: "Full-feature mobile commerce application. Leverages Flutter's native performance to provide a smooth, fast, and secure user experience for pet owners.",
-    tech: ["Flutter", "Dart", "Provider", "Firebase"],
-    category: "Mobile App",
-    liveDemo: "",
-    github: "https://github.com/movindu477/PetMart-Mobile-App",
-    image: image6,
   },
 ];
 
@@ -154,25 +127,13 @@ const Projects = () => {
                   </div>
 
                   {/* Project Description */}
-                  <p className="text-xs sm:text-sm text-white/60 font-medium leading-relaxed line-clamp-3 mb-4">
+                  <p className="text-xs sm:text-sm text-white/60 font-medium leading-relaxed mb-4">
                     {project.description}
                   </p>
                 </div>
 
-                {/* Bottom Row: Tech Tags + GitHub & Live Demo Action Buttons */}
-                <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-3">
-                  {/* Tech Tags */}
-                  <div className="flex flex-wrap gap-1.5 max-w-[65%]">
-                    {project.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2 py-0.5 bg-white/5 border border-white/10 rounded text-[10px] font-semibold text-white/70"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
+                {/* Bottom Row: GitHub & Live Demo Action Buttons */}
+                <div className="pt-3 border-t border-white/5 flex items-center justify-end gap-3">
                   {/* Action Buttons */}
                   <div className="flex items-center gap-2 shrink-0">
                     {project.liveDemo && (

@@ -1,239 +1,180 @@
-import React from "react";
-import meImage from "../assets/me3.png";
+import React, { Suspense, lazy } from "react";
+import { ArrowUpRight, Asterisk } from "lucide-react";
+import meImage from "../assets/me3.jpg";
+import { scrollToSection } from "../utils/scroll";
 
-const skills = [
-  { num: "01", label: "Full Stack Dev" },
-  { num: "02", label: "Mobile Apps" },
-  { num: "03", label: "UI / UX" },
-  { num: "04", label: "Laravel" },
-  { num: "05", label: "Flutter" },
+// three.js is code-split so it never blocks the hero's first paint
+const HeroScene = lazy(() => import("./HeroScene"));
+
+// me3.jpg has its own orange backdrop — soften all four edges so it melts into the hero background
+const PORTRAIT_MASK =
+  "linear-gradient(to bottom, transparent 0%, black 12%, black 86%, transparent 100%), linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%)";
+
+/* Grid line positions (%) — mobile uses a simpler 2-column grid */
+const COLS = [
+  { x: 0 },
+  { x: 33.333, desktopOnly: true },
+  { x: 50, mobileOnly: true },
+  { x: 66.666, desktopOnly: true },
+  { x: 100 },
 ];
+const ROWS = [0, 33.333, 66.666, 100];
 
-/* ── reusable social icon button ── */
-const SocialBtn = ({ href, children }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-10 h-10 rounded-full bg-white/8 hover:bg-[#FF5400]
-               border border-white/12 flex items-center justify-center
-               transition-all duration-300 hover:-translate-y-1 hover:shadow-lg
-               hover:shadow-orange-500/30"
-  >
-    {children}
-  </a>
+const visibility = ({ desktopOnly, mobileOnly }) =>
+  desktopOnly ? "hidden lg:block" : mobileOnly ? "lg:hidden" : "";
+
+/* Thin frame grid with "+" markers at every intersection */
+const HeroGrid = () => (
+  <div className="absolute inset-x-4 sm:inset-x-8 lg:inset-x-10 top-[72px] lg:top-[84px] bottom-3 lg:bottom-5 pointer-events-none">
+    {COLS.map((col) => (
+      <span
+        key={`c${col.x}`}
+        className={`absolute top-0 bottom-0 w-px bg-white/[0.13] ${visibility(col)}`}
+        style={{ left: `${col.x}%` }}
+      />
+    ))}
+    {ROWS.map((y) => (
+      <span
+        key={`r${y}`}
+        className="absolute left-0 right-0 h-px bg-white/[0.13]"
+        style={{ top: `${y}%` }}
+      />
+    ))}
+    {COLS.flatMap((col) =>
+      ROWS.map((y) => (
+        <span
+          key={`p${col.x}-${y}`}
+          className={`absolute w-[11px] h-[11px] -translate-x-1/2 -translate-y-1/2 ${visibility(col)}`}
+          style={{ left: `${col.x}%`, top: `${y}%` }}
+        >
+          <span className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-white/70" />
+          <span className="absolute top-1/2 left-0 right-0 h-px -translate-y-1/2 bg-white/70" />
+        </span>
+      ))
+    )}
+  </div>
 );
 
 const Hero = () => {
-  const scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section
       id="home"
-      className="relative w-full h-[100dvh] overflow-hidden bg-[#0d0d0d] flex flex-col"
+      className="relative w-full h-svh min-h-[620px] lg:min-h-[680px] overflow-hidden text-white select-none"
+      style={{
+        background:
+          "radial-gradient(120% 90% at 50% 45%, #E9470F 0%, #E6430C 45%, #C93A08 76%, #9E2D05 100%)",
+      }}
     >
-
-      {/* ══════════════════════════════
-          LAYER 0 — Background
-      ══════════════════════════════ */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-
-        {/* Dot grid */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: "radial-gradient(circle, #FF5400 1px, transparent 1px)",
-            backgroundSize: "36px 36px",
-          }}
-        />
-
-        {/* Warm glow — behind person, centred slightly right on desktop */}
-        <div
-          className="absolute rounded-full -translate-y-1/2
-                     left-1/2 -translate-x-1/2
-                     lg:left-[70%] lg:-translate-x-1/2
-                     top-[40%] md:top-[48%]
-                     w-[300px] h-[300px]
-                     sm:w-[440px] sm:h-[440px]
-                     md:w-[620px] md:h-[620px]
-                     lg:w-[860px] lg:h-[860px]"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(255,84,0,0.55) 0%, rgba(255,84,0,0.24) 36%, rgba(255,84,0,0.07) 62%, transparent 78%)",
-          }}
-        />
-
-        {/* Dark vignette */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 92% 92% at 50% 48%, transparent 20%, #0d0d0d 100%)",
-          }}
-        />
-
-        {/* Subtle horizontal line accent — desktop only */}
-        <div className="hidden lg:block absolute top-[48%] left-0 right-0 h-px bg-white/[0.04]" />
+      {/* ── Layer 1: three.js embers + light ribbons ── */}
+      <div className="absolute inset-0 z-[1]">
+        <Suspense fallback={null}>
+          <HeroScene />
+        </Suspense>
       </div>
 
-      {/* ══════════════════════════════════════════════════████████████
-          DESKTOP LAYOUT  (lg and above)
-      ████████████══════════════════════════════════════════════════ */}
-
-      {/* ─── DESKTOP heading — z-10 so it sits BEHIND the z-20 image ─── */}
-      <div className="hidden lg:flex absolute inset-0 z-10 pointer-events-none
-                      flex-col items-start justify-start
-                      pt-[110px]
-                      pl-16 xl:pl-24">
-        <h1 className="font-black leading-[0.86] tracking-tighter text-white uppercase select-none
-                       text-[6rem] xl:text-[7.5rem]">
-          MY<br />
-          NAME<br />
-          <span className="text-[#FF5400]">IS</span><br />
-          <span className="text-[#FF5400]">MOVINDU</span>
-        </h1>
-        <p className="text-white/40 font-bold tracking-[0.22em] uppercase select-none mt-6 text-xs xl:text-sm whitespace-nowrap">
-          Full Stack Developer and Mobile Application Developer
-        </p>
+      {/* ── Layer 2: frame grid ── */}
+      <div className="absolute inset-0 z-[2] pointer-events-none">
+        <HeroGrid />
       </div>
 
-      {/* ─── LEFT PANEL (desktop) — social + CTA anchored bottom-left ─── */}
-      <div className="hidden lg:flex absolute inset-0 z-30 pointer-events-none
-                      items-end
-                      pl-16 xl:pl-24 pb-4 xl:pb-6">
-        <div className="flex flex-col items-start gap-5 pointer-events-auto">
-
-
-
-          {/* CTA Buttons */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="inline-flex items-center gap-3 bg-[#FF5400] hover:bg-orange-500
-                         text-white font-bold rounded-full px-7 py-3.5
-                         transition-all duration-300 hover:-translate-y-0.5
-                         shadow-xl shadow-orange-700/30 text-sm"
-            >
-              Hire Me
-              <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">
-                <svg className="w-3.5 h-3.5 -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </span>
-            </button>
-
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="inline-flex items-center gap-2 text-white font-bold
-                         px-7 py-3.5 rounded-full border border-white/15
-                         bg-white/5 hover:bg-white/12
-                         transition-all duration-300 hover:-translate-y-0.5 text-sm"
-            >
-              My Projects
-            </button>
-          </div>
-        </div>
-      </div>
-
-
-      {/* ─── CENTRE — Person image ─── */}
-      <div className="hidden lg:flex absolute inset-0 z-20 items-end justify-center pointer-events-none pb-[8vh]">
+      {/* ── Layer 3: portrait, bleeding off the bottom edge ── */}
+      <div className="absolute inset-0 z-[4] pointer-events-none">
         <img
           src={meImage}
           alt="Movindu Weerabahu"
-          className="w-auto select-none object-contain object-bottom translate-x-[80%]
-                     lg:h-[86vh] xl:h-[93vh]"
+          fetchPriority="high"
+          className="hero-portrait absolute left-1/2 -translate-x-1/2 w-auto max-w-none
+                     h-[86%] bottom-[-10%] sm:h-[92%] sm:bottom-[-14%] lg:h-[126%] lg:bottom-[-24%]"
           style={{
-            maskImage: "linear-gradient(to top, transparent 0%, black 18%)",
-            WebkitMaskImage: "linear-gradient(to top, transparent 0%, black 18%)",
+            maskImage: PORTRAIT_MASK,
+            WebkitMaskImage: PORTRAIT_MASK,
+            maskComposite: "intersect",
+            WebkitMaskComposite: "source-in",
           }}
         />
       </div>
+      {/* Soft shade at the bottom so the name stays legible */}
+      <div className="absolute inset-x-0 bottom-0 h-[40%] z-[5] pointer-events-none bg-gradient-to-t from-black/30 to-transparent" />
 
-
-
-
-
-
-      {/* ══════════════════════════════════════════════════████████████
-          MOBILE &amp; TABLET LAYOUT  (below lg)
-      ████████████══════════════════════════════════════════════════ */}
-
-      {/* Mobile background glow (same dot grid and radial above cover this) */}
-
-      {/* Mobile heading — BEHIND image */}
-      <div className="lg:hidden absolute inset-0 z-10 pointer-events-none
-                      flex flex-col justify-start
-                      px-5 sm:px-8
-                      pt-[70px] sm:pt-[90px]">
-        <h1 className="font-black leading-[1.2] tracking-tighter text-white uppercase select-none
-                       text-[2.6rem] sm:text-[4rem] md:text-[5.5rem]">
-          MY NAME<br />
-          <span className="text-[#FF5400]">IS</span><br />
-          <span className="text-[#FF5400]">MOVINDU</span>
-        </h1>
-      </div>
-
-      {/* Mobile person image */}
-      <div className="lg:hidden absolute inset-0 z-20 flex items-end justify-center pointer-events-none
-                      pb-[16vh] sm:pb-[12vh] md:pb-0">
-        <img
-          src={meImage}
-          alt="Movindu Weerabahu"
-          className="w-auto select-none object-contain object-bottom
-                     h-[58vh] sm:h-[70vh] md:h-[82vh]"
-          style={{
-            maskImage: "linear-gradient(to top, transparent 0%, black 20%)",
-            WebkitMaskImage: "linear-gradient(to top, transparent 0%, black 20%)",
-          }}
-        />
-      </div>
-
-      {/* Mobile bottom bar */}
-      <div className="lg:hidden absolute bottom-0 left-0 right-0 z-30 px-5 sm:px-8">
-
-        {/* Center Slogan + CTA */}
-        <div className="flex flex-col items-center gap-6 pb-6 sm:pb-10">
-
-          <p className="text-white/40 font-bold tracking-[0.2em] uppercase select-none
-                        text-[9px] sm:text-[11px] md:text-xs leading-tight text-center max-w-[90%]">
+      {/* ── Tagline + CTAs (top-left) ── */}
+      <div
+        className="absolute z-[6] left-5 sm:left-12 lg:left-16
+                   top-[92px] sm:top-[112px] lg:top-[37%]
+                   max-w-[88%] sm:max-w-[320px] lg:max-w-[270px] xl:max-w-[320px]"
+      >
+        <div className="hero-rise" style={{ animationDelay: "0.35s" }}>
+          <p className="uppercase font-semibold leading-[1.55] tracking-wide indent-6 sm:indent-8 text-[11px] sm:text-xs xl:text-[13px] [text-shadow:0_1px_12px_rgba(120,30,0,0.35)]">
             Full Stack Developer and Mobile Application Developer
           </p>
 
-          {/* CTA */}
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4 sm:mt-5">
             <button
               onClick={() => scrollToSection("contact")}
-              className="inline-flex items-center gap-2.5 bg-white/90 hover:bg-white text-[#0d0d0d]
-                         font-bold rounded-full px-4 py-3 sm:px-5 sm:py-3.5
-                         transition-all duration-300 hover:-translate-y-0.5
-                         shadow-lg shadow-black/40 group text-xs sm:text-sm"
+              className="group/btn inline-flex items-center gap-2 bg-[#0d0d0d] hover:bg-black text-white
+                         font-bold rounded-full pl-4 pr-1.5 py-1.5 text-[11px] sm:text-xs
+                         transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-black/25"
             >
-              <span>Hire Me</span>
-              <span className="rounded-full bg-[#FF5400] group-hover:bg-orange-400 transition-colors
-                               w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center">
-                <svg className="text-white -rotate-45 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+              Hire Me
+              <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#FF5400] flex items-center justify-center transition-transform duration-300 group-hover/btn:rotate-45">
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </span>
             </button>
             <button
               onClick={() => scrollToSection("projects")}
-              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20
-                         text-white font-bold rounded-full px-4 py-3 sm:px-5 sm:py-3.5
-                         border border-white/20 transition-all duration-300 text-xs sm:text-sm"
+              className="inline-flex items-center font-bold rounded-full px-4 py-2 sm:py-2.5 text-[11px] sm:text-xs
+                         border border-white/50 hover:bg-white hover:text-[#0d0d0d]
+                         transition-all duration-300 hover:-translate-y-0.5"
             >
               My Projects
             </button>
           </div>
         </div>
-
-
       </div>
 
+      {/* ── Bottom: name (left) + Let's Talk card (right) ── */}
+      <div
+        className="absolute inset-x-0 bottom-0 z-[6] px-5 sm:px-12 lg:px-16 pb-6 sm:pb-8 lg:pb-10
+                   flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 lg:gap-8"
+      >
+        <div className="hero-rise" style={{ animationDelay: "0.45s" }}>
+          <p className="text-xs sm:text-sm font-semibold tracking-wide mb-1 sm:mb-2">
+            ©2026 &nbsp;·&nbsp; MY NAME IS
+          </p>
+          <h1 className="font-black uppercase leading-[0.82] tracking-tighter text-[12.5vw] sm:text-[11.5vw] lg:text-[7vw]">
+            Movindu
+          </h1>
+        </div>
+
+        <div
+          className="hero-rise relative w-full sm:max-w-sm lg:w-[310px] xl:w-[350px] shrink-0
+                     flex items-center gap-3 p-2.5
+                     bg-[#0d0d0d]/90 backdrop-blur-md border border-white/10 rounded-md shadow-2xl shadow-black/40"
+          style={{ animationDelay: "0.65s" }}
+        >
+          <div className="w-14 h-14 sm:w-[68px] sm:h-[68px] shrink-0 overflow-hidden rounded-[3px] bg-gradient-to-b from-[#FF7A30] to-[#FF5400]">
+            <img src={meImage} alt="" className="w-full h-full object-cover object-[50%_18%]" />
+          </div>
+
+          <div className="flex-1 min-w-0 self-stretch flex flex-col justify-between py-0.5">
+            <p className="text-[10px] sm:text-[11px] text-white/60">Let&apos;s Talk</p>
+            <div>
+              <p className="text-sm font-bold leading-tight truncate">Movindu</p>
+              <p className="text-[10px] sm:text-[11px] text-white/50 truncate">Full Stack Developer</p>
+            </div>
+          </div>
+
+          <Asterisk className="absolute top-2.5 right-3 w-3.5 h-3.5 text-white/60" />
+
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="self-end shrink-0 w-9 h-9 rounded-[3px] bg-white text-[#0d0d0d] flex items-center justify-center
+                       transition-colors duration-300 hover:bg-[#FF5400] hover:text-white"
+            aria-label="Contact me"
+          >
+            <ArrowUpRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
     </section>
   );
 };

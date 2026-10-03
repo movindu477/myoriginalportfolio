@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Download, CheckCircle, Briefcase, Layers, Code, Sparkles, ExternalLink, Globe, Smartphone, Database } from "lucide-react";
-import meImage from "../assets/me3ori.png";
+import { Download, CheckCircle, Layers, Code, Sparkles, ExternalLink, Globe, Smartphone, Database, Quote, ArrowUpRight } from "lucide-react";
+import meImage from "../assets/me3.jpg";
 import resumeFile from "../assets/Movindus_CV.pdf";
 
 const CountUp = ({ end, duration = 2000 }) => {
@@ -58,22 +58,22 @@ const About = () => {
   const expertise = [
     {
       title: "Web Development",
+      description: "Fast, scalable web apps — from interface to API.",
       tags: ["React", "Laravel", "Node.js"],
-      icon: <Globe className="w-5 h-5" />,
-      color: "bg-blue-500/10 text-blue-500"
+      icon: Globe,
     },
     {
       title: "Mobile Apps",
+      description: "Cross-platform apps with a native feel.",
       tags: ["Flutter", "Dart", "Firebase"],
-      icon: <Smartphone className="w-5 h-5" />,
-      color: "bg-[#FF5400]/10 text-[#FF5400]"
+      icon: Smartphone,
     },
     {
       title: "Architecture",
+      description: "Maintainable systems that are built to grow.",
       tags: ["Clean Code", "Design Patterns"],
-      icon: <Layers className="w-5 h-5" />,
-      color: "bg-purple-500/10 text-purple-500"
-    }
+      icon: Layers,
+    },
   ];
 
   return (
@@ -176,31 +176,79 @@ const About = () => {
             </div>
 
             {/* Expertise Grid */}
-            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-              {expertise.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="group p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-[#FF5400]/40 hover:bg-white/[0.05] transition-all duration-500"
-                >
-                  <div className={`w-10 h-10 sm:w-12 sm:h-12 ${item.color} rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:scale-110 transition-transform duration-500`}>
-                    {item.icon}
-                  </div>
-                  <h4 className="text-white font-black uppercase tracking-widest mb-3 text-xs sm:text-sm">{item.title}</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {item.tags.map(tag => (
-                      <span key={tag} className="px-2.5 py-1 bg-white/5 rounded-full text-[9px] sm:text-[10px] font-bold text-white/40 tracking-wider transition-colors duration-500 group-hover:text-white/80 group-hover:bg-white/10">{tag}</span>
-                    ))}
-                  </div>
-                </div>
-              ))}
+            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+              {expertise.map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.title}
+                    className="group relative flex flex-col min-h-[210px] sm:min-h-[230px] p-6 sm:p-7 rounded-2xl overflow-hidden
+                               bg-gradient-to-b from-white/[0.05] to-white/[0.015] border border-white/10
+                               transition-all duration-500 hover:-translate-y-1.5 hover:border-[#FF5400]/40
+                               hover:shadow-[0_20px_50px_-20px_rgba(255,84,0,0.35)]"
+                  >
+                    {/* Hover glow + bottom accent line */}
+                    <div className="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-[#FF5400]/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                    <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#FF5400] group-hover:w-full transition-all duration-700 ease-out" />
 
-              {/* Dynamic Quote Box */}
-              <div className="p-8 rounded-3xl bg-[#FF5400] flex flex-col justify-center gap-4 relative overflow-hidden group">
-                <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/20 blur-[60px] rounded-full group-hover:scale-150 transition-transform duration-[2s]"></div>
-                <Briefcase className="w-8 h-8 text-white mb-2" />
-                <p className="text-white font-black text-lg leading-tight uppercase tracking-tight italic">
-                  "Turning complex code into simple, elegant digital products."
-                </p>
+                    <div className="relative flex items-start justify-between">
+                      <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center
+                                      bg-[#FF5400]/10 border border-[#FF5400]/20 text-[#FF5400]
+                                      transition-all duration-500 group-hover:bg-[#FF5400] group-hover:text-white group-hover:rotate-[-6deg]">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <span className="text-sm font-black text-white/15 tracking-widest transition-colors duration-500 group-hover:text-[#FF5400]">
+                        0{idx + 1}
+                      </span>
+                    </div>
+
+                    <div className="relative mt-auto pt-8">
+                      <h4 className="text-white font-black uppercase tracking-wider text-sm sm:text-base">{item.title}</h4>
+                      <p className="mt-2 text-white/45 text-[11px] sm:text-xs leading-relaxed">{item.description}</p>
+                      <div className="flex flex-wrap gap-1.5 mt-4">
+                        {item.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2.5 py-1 rounded-md border border-white/10 bg-white/[0.04] text-[9px] sm:text-[10px] font-bold text-white/55 tracking-wider
+                                       transition-colors duration-500 group-hover:text-white group-hover:border-[#FF5400]/30"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* Quote card */}
+              <div
+                className="group relative flex flex-col justify-between min-h-[210px] sm:min-h-[230px] p-6 sm:p-7 rounded-2xl overflow-hidden
+                           bg-gradient-to-br from-[#FF6A1A] via-[#FF5400] to-[#D94400]
+                           transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-15px_rgba(255,84,0,0.55)]"
+              >
+                {/* Subtle grid texture, echoing the hero */}
+                <div
+                  className="absolute inset-0 opacity-[0.12] pointer-events-none"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+                    backgroundSize: "36px 36px",
+                  }}
+                />
+                <div className="absolute -top-12 -right-12 w-44 h-44 bg-white/25 blur-[60px] rounded-full transition-transform duration-[2s] group-hover:scale-150" />
+
+                <div className="relative flex items-start justify-between">
+                  <Quote className="w-8 h-8 text-white fill-white/20" />
+                  <ArrowUpRight className="w-5 h-5 text-white/70 transition-transform duration-500 group-hover:rotate-45" />
+                </div>
+
+                <div className="relative mt-6">
+                  <p className="text-white font-black text-base sm:text-lg leading-snug uppercase tracking-tight italic">
+                    Turning complex code into simple, elegant digital products.
+                  </p>
+                  <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.25em] text-white/75">— Movindu Weerabahu</p>
+                </div>
               </div>
             </div>
 

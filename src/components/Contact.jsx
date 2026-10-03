@@ -1,30 +1,37 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, CheckCircle, ArrowRight } from 'lucide-react';
+import { Mail, Phone, Github, Linkedin, User, AtSign, Send, CheckCircle, ArrowUpRight } from 'lucide-react';
 import { InstagramLogoIcon } from '@phosphor-icons/react/dist/ssr';
+import bgImage from '../assets/contact.avif';
+import meImage from '../assets/me3.jpg';
+
+const EMAIL = 'movinduweerabahu314@gmail.com';
+const WHATSAPP_NUMBER = '94743090367';
+
+const socialLinks = [
+  { icon: Github, label: 'GitHub', href: 'https://github.com/movindu477' },
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/movindu-weerabahu-75a6b6320/' },
+  { icon: InstagramLogoIcon, label: 'Instagram', href: 'https://www.instagram.com/itz.movi_jr/' },
+];
+
+const fields = [
+  { name: 'name', label: 'Name', type: 'text', placeholder: 'Jane Smith', autoComplete: 'name', icon: User },
+  { name: 'email', label: 'Email', type: 'email', placeholder: 'jane@example.com', autoComplete: 'email', icon: AtSign },
+];
+
+const inputClass = (hasError) =>
+  `w-full rounded-md bg-[#f2f2f2] px-4 py-3 text-base sm:text-sm text-neutral-900 font-medium outline-none transition-all
+   placeholder:text-neutral-400 border focus:bg-white focus:ring-2 focus:ring-[#FF5400]/25
+   ${hasError ? 'border-red-500' : 'border-transparent focus:border-[#FF5400]'}`;
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
   const validateForm = () => {
@@ -35,207 +42,218 @@ const Contact = () => {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email';
     }
-    if (!formData.subject.trim()) newErrors.subject = 'Subject is required';
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     } else if (formData.message.trim().length < 10) {
       newErrors.message = 'Message should be at least 10 characters long';
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
+    const whatsappMessage = `Hello! I'm ${formData.name}.\n\n${formData.message}\n\nEmail: ${formData.email}`;
+    // Opened straight from the submit gesture so popup blockers allow it
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`, '_blank', 'noopener,noreferrer');
+
     setIsSubmitted(true);
-
-    const whatsappMessage = `Hello! I'm ${formData.name}.\n\nSubject: ${formData.subject}\n\nMessage: ${formData.message}\n\nEmail: ${formData.email}`;
-    const whatsappNumber = '94743090367';
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-
     setTimeout(() => {
-      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    }, 1500);
-
-    setTimeout(() => {
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
       setIsSubmitted(false);
     }, 3000);
   };
 
-  const contactInfo = [
-    { icon: Mail, label: 'Email', value: 'movinduweerabahu314@gmail.com', href: 'mailto:movinduweerabahu314@gmail.com' },
-    { icon: Phone, label: 'Phone', value: '+94 74 309 0367', href: 'tel:+94 74 309 0367' },
-    { icon: MapPin, label: 'Location', value: 'Kandana, Sri Lanka', href: '#' }
-  ];
-
-  const socialLinks = [
-    { icon: Github, label: 'GitHub', href: 'https://github.com/movindu477' },
-    { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/movindu-weerabahu-75a6b6320/' },
-    { icon: InstagramLogoIcon, label: 'Instagram', href: 'https://www.instagram.com/itz.movi_jr/' }
-  ];
-
   return (
-    <section id="contact" className="w-full bg-black text-white py-24 px-4 sm:px-8 lg:px-16 relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none"></div>
+    <section id="contact" className="relative w-full min-h-svh overflow-hidden bg-black text-white flex flex-col">
 
-      {/* Glow Effect */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF5400] rounded-full filter blur-[150px] opacity-[0.05] pointer-events-none"></div>
+      {/* ── Background: blurred portrait, colour-graded orange → teal ── */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <img
+          src={bgImage}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-[50%_35%] scale-125 blur-[3px] saturate-150"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(115deg, rgba(140,30,0,0.88) 0%, rgba(230,67,12,0.5) 38%, rgba(0,105,105,0.5) 72%, rgba(0,40,45,0.9) 100%)',
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse 85% 75% at 60% 50%, transparent 30%, rgba(0,0,0,0.65) 100%)' }}
+        />
+        {/* Blend into the dark section above and the footer below */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#0d0d0d] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/80 to-transparent" />
+      </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
+      <div className="relative z-10 flex-1 flex items-center w-full max-w-[1400px] mx-auto px-5 sm:px-12 lg:px-20 pt-28 pb-12 sm:pt-32">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
 
-        {/* Left Side: Contact Info */}
-        <div className="flex flex-col justify-center order-2 lg:order-1">
-          <div className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full w-fit mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#FF5400] animate-pulse"></span>
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Get in Touch</span>
+          {/* ── Heading + direct contact (first on mobile, right on desktop) ── */}
+          <div className="lg:col-span-7 lg:order-2">
+            <span className="inline-flex items-center gap-2 rounded-sm bg-white px-2.5 py-1 text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-neutral-900">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5400]" />
+              Get in Touch
+            </span>
+            <h2 className="mt-5 font-black uppercase leading-[0.95] tracking-tight text-[2.5rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] [text-shadow:0_4px_30px_rgba(0,0,0,0.35)]">
+              Let&apos;s Create<br />Together
+            </h2>
+            <p className="mt-6 max-w-md text-sm sm:text-base text-white/75 leading-relaxed">
+              Have a project in mind or an opportunity to share? I&apos;m always open to new collaborations.
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-x-6 sm:gap-y-3">
+              <a href={`mailto:${EMAIL}`} className="group inline-flex items-center gap-2.5 text-xs sm:text-sm font-bold text-white/90 hover:text-white break-all">
+                <span className="w-9 h-9 shrink-0 rounded-full border border-white/25 bg-white/10 backdrop-blur-md flex items-center justify-center transition-colors group-hover:bg-white group-hover:text-black">
+                  <Mail className="w-4 h-4" />
+                </span>
+                {EMAIL}
+              </a>
+              <a href="tel:+94743090367" className="group inline-flex items-center gap-2.5 text-xs sm:text-sm font-bold text-white/90 hover:text-white">
+                <span className="w-9 h-9 shrink-0 rounded-full border border-white/25 bg-white/10 backdrop-blur-md flex items-center justify-center transition-colors group-hover:bg-white group-hover:text-black">
+                  <Phone className="w-4 h-4" />
+                </span>
+                +94 74 309 0367
+              </a>
+            </div>
+
+            <div className="mt-5 flex items-center gap-2.5">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    title={social.label}
+                    className="w-9 h-9 rounded-full border border-white/25 bg-white/10 backdrop-blur-md flex items-center justify-center text-white/90
+                               transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-black"
+                  >
+                    <Icon className="w-4 h-4" />
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-[1.1] mb-6 uppercase text-white">
-            Let's Work <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5400] to-orange-600">Together.</span>
-          </h2>
+          {/* ── Form card ── */}
+          <div className="lg:col-span-5 xl:col-span-4 lg:order-1 w-full max-w-md mx-auto lg:mx-0">
+            <div className="overflow-hidden rounded-lg bg-white text-neutral-900 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
+              {/* Header band */}
+              <div className="relative h-32 sm:h-36 flex items-center justify-center overflow-hidden bg-[#E6430C]">
+                <img
+                  src={meImage}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover object-[50%_38%]"
+                />
+                {/* Darkens the photo just enough for the name to read clearly */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-black/10" />
+                <span className="relative text-lg sm:text-xl font-black text-white tracking-tight [text-shadow:0_2px_12px_rgba(0,0,0,0.5)]">
+                  Movindu<sup className="ml-0.5 text-[10px] align-super">®</sup>
+                </span>
+              </div>
 
-          <p className="text-gray-400 text-lg mb-12 max-w-md leading-relaxed">
-            Ready to bring your ideas to life? I'm always open to new opportunities and collaborations.
+              <div className="p-5 sm:p-7">
+                <h3 className="text-center text-base sm:text-lg font-black tracking-tight">Reach Out to Me</h3>
+
+                <form onSubmit={handleSubmit} noValidate className="mt-5 sm:mt-6 flex flex-col gap-4">
+                  {fields.map((f) => {
+                    const Icon = f.icon;
+                    return (
+                      <div key={f.name}>
+                        <label htmlFor={`contact-${f.name}`} className="block mb-1.5 text-[11px] font-black">
+                          {f.label}
+                        </label>
+                        <div className="relative">
+                          <input
+                            id={`contact-${f.name}`}
+                            type={f.type}
+                            name={f.name}
+                            autoComplete={f.autoComplete}
+                            value={formData[f.name]}
+                            onChange={handleChange}
+                            placeholder={f.placeholder}
+                            aria-invalid={!!errors[f.name]}
+                            aria-describedby={errors[f.name] ? `contact-${f.name}-error` : undefined}
+                            className={`${inputClass(errors[f.name])} pr-10`}
+                          />
+                          <Icon className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none" />
+                        </div>
+                        {errors[f.name] && (
+                          <p id={`contact-${f.name}-error`} className="mt-1 text-[11px] font-medium text-red-600">{errors[f.name]}</p>
+                        )}
+                      </div>
+                    );
+                  })}
+
+                  <div>
+                    <label htmlFor="contact-message" className="block mb-1.5 text-[11px] font-black">Message</label>
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Your message"
+                      aria-invalid={!!errors.message}
+                      aria-describedby={errors.message ? 'contact-message-error' : undefined}
+                      className={`${inputClass(errors.message)} resize-none`}
+                    />
+                    {errors.message && (
+                      <p id="contact-message-error" className="mt-1 text-[11px] font-medium text-red-600">{errors.message}</p>
+                    )}
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitted}
+                    className="group mt-1 inline-flex items-center justify-center gap-2.5 rounded-md bg-neutral-950 px-6 py-3.5 text-xs sm:text-[13px] font-black uppercase tracking-wider text-white
+                               transition-colors hover:bg-[#FF5400] active:scale-[0.99] disabled:bg-green-600 disabled:cursor-default"
+                  >
+                    {isSubmitted ? (
+                      <>
+                        <CheckCircle className="w-4 h-4" />
+                        WhatsApp Opened
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <Send className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </>
+                    )}
+                  </button>
+                  <p className="text-center text-[10px] text-neutral-400">Opens WhatsApp with your message ready to send.</p>
+                  <p className="sr-only" role="status">{isSubmitted ? 'WhatsApp opened with your message.' : ''}</p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="relative z-10 w-full max-w-[1400px] mx-auto px-5 sm:px-12 lg:px-20 pb-6">
+        <div className="pt-5 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-center">
+          <p className="text-xs text-white/60 font-medium">
+            © 2026 Movindu Weerabahu. Made with <span className="text-[#FF5400]">Creativity</span>.
           </p>
-
-          <div className="space-y-8 mb-12">
-            {contactInfo.map((item, index) => (
-              <a key={index} href={item.href} className="flex items-center gap-4 sm:gap-6 group cursor-pointer p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10">
-                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white group-hover:bg-[#FF5400] transition-all duration-300 shadow-sm border border-white/5 shrink-0">
-                  <item.icon className="w-5 h-5" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">{item.label}</p>
-                  <p className="text-sm sm:text-lg font-bold text-white group-hover:text-[#FF5400] transition-colors break-all">{item.value}</p>
-                </div>
-              </a>
-            ))}
-          </div>
-
-          <div className="flex gap-4">
-            {socialLinks.map((social, index) => (
-              <a
-                key={index}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-sm hover:shadow-lg bg-white/5"
-              >
-                <social.icon className="w-5 h-5" />
-              </a>
-            ))}
-          </div>
+          <a
+            href={`mailto:${EMAIL}`}
+            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-white/70 hover:text-white transition-colors"
+          >
+            Say hello <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
         </div>
-
-        {/* Right Side: Modern Form */}
-        <div className="order-1 lg:order-2">
-          <div className="bg-[#111] p-8 md:p-10 rounded-[30px] border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-lg">
-
-            {/* Decorative blob */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF5400]/10 rounded-bl-[100px] -z-0"></div>
-
-            <div className="relative z-10">
-              <h3 className="text-2xl font-black uppercase mb-8 flex items-center gap-3 text-white">
-                Send a Message
-                <ArrowRight className="w-5 h-5 text-[#FF5400]" />
-              </h3>
-
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide ml-1">Your Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className={`w-full bg-[#1a1a1a] border ${errors.name ? 'border-red-500' : 'border-white/10 focus:border-[#FF5400]'} rounded-xl px-4 py-3.5 text-white outline-none transition-all placeholder:text-gray-600 font-medium`}
-                      placeholder="John Doe"
-                    />
-                    {errors.name && <p className="text-red-500 text-xs ml-1 font-medium">{errors.name}</p>}
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wide ml-1">Email Address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className={`w-full bg-[#1a1a1a] border ${errors.email ? 'border-red-500' : 'border-white/10 focus:border-[#FF5400]'} rounded-xl px-4 py-3.5 text-white outline-none transition-all placeholder:text-gray-600 font-medium`}
-                      placeholder="john@example.com"
-                    />
-                    {errors.email && <p className="text-red-500 text-xs ml-1 font-medium">{errors.email}</p>}
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-500 uppercase tracking-wide ml-1">Subject</label>
-                  <input
-                    type="text"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className={`w-full bg-[#1a1a1a] border ${errors.subject ? 'border-red-500' : 'border-white/10 focus:border-[#FF5400]'} rounded-xl px-4 py-3.5 text-white outline-none transition-all placeholder:text-gray-600 font-medium`}
-                    placeholder="Project Inquiry"
-                  />
-                  {errors.subject && <p className="text-red-500 text-xs ml-1 font-medium">{errors.subject}</p>}
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-500 uppercase tracking-wide ml-1">Message</label>
-                  <textarea
-                    name="message"
-                    rows="4"
-                    value={formData.message}
-                    onChange={handleChange}
-                    className={`w-full bg-[#1a1a1a] border ${errors.message ? 'border-red-500' : 'border-white/10 focus:border-[#FF5400]'} rounded-xl px-4 py-3.5 text-white outline-none transition-all placeholder:text-gray-600 font-medium resize-none`}
-                    placeholder="Tell me about your project..."
-                  />
-                  {errors.message && <p className="text-red-500 text-xs ml-1 font-medium">{errors.message}</p>}
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitted}
-                  className="w-full bg-[#FF5400] text-white font-bold text-base uppercase tracking-wider py-4 rounded-xl hover:bg-[#ff6a22] transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 group shadow-xl shadow-orange-500/10"
-                >
-                  {isSubmitted ? (
-                    <>
-                      <CheckCircle className="w-5 h-5 animate-bounce" />
-                      <span>Message Sent!</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Send Message</span>
-                      <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </>
-                  )}
-                </button>
-              </form>
-            </div>
-
-            {/* Trust badge or extra info */}
-            <div className="mt-8 flex justify-center lg:justify-start gap-2 text-gray-500 text-xs font-medium uppercase tracking-widest pl-4">
-              <span>• Fast Response</span>
-              <span>• Secure</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      {/* Modern Footer */}
-      <div className="mt-24 pt-8 border-t border-white/10 text-center">
-        <p className="text-gray-400 text-sm font-medium">
-          © 2026 Movindu Weerabahu. Made with <span className="text-[#FF5400]">Creativity</span>.
-        </p>
-      </div>
+      </footer>
     </section>
   );
 };

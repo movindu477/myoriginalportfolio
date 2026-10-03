@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, Home, User, Folder, Mail, UserCircle, ArrowUpRight, Briefcase } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { pageTop, scrollToSection } from "../utils/scroll";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,9 +25,10 @@ const Navbar = () => {
       const sections = ["home", "about", "experience", "projects", "contact"];
       const scrollPosition = window.scrollY + 150;
 
-      for (const section of sections) {
+      // Last section whose top has been passed wins
+      for (const section of [...sections].reverse()) {
         const element = document.getElementById(section);
-        if (element && element.offsetTop <= scrollPosition && element.offsetTop + element.offsetHeight > scrollPosition) {
+        if (element && (section === "home" || pageTop(element) <= scrollPosition)) {
           setActiveSection(section);
           break;
         }
@@ -46,12 +48,8 @@ const Navbar = () => {
       return;
     }
 
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      window.scrollTo({
-        top: targetElement.offsetTop - 80,
-        behavior: "smooth",
-      });
+    if (document.getElementById(targetId)) {
+      scrollToSection(targetId);
       setActiveSection(targetId);
     }
   };
@@ -115,7 +113,7 @@ const Navbar = () => {
 
           {/* Mobile Hamburger (Top Right) */}
           <button
-            className="sm:hidden ml-auto w-10 h-10 flex items-center justify-center text-white mix-blend-difference active:scale-90 transition-transform"
+            className="sm:hidden ml-auto w-10 h-10 flex items-center justify-center text-white active:scale-90 transition-transform"
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
           >
