@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@phosphor-icons/core": "^2.1.1",
     "@phosphor-icons/react": "^2.1.10",
+    "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^9.8.1",
     "@tailwindcss/vite": "^4.1.14",
     "class-variance-authority": "^0.7.1",

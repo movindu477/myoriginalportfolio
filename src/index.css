@@ -446,3 +446,18 @@ button:focus-visible {
     animation: none;
   }
 }
+
+/* ── Tech carousel: active dot fills over the card's reading time ── */
+@keyframes techDotFill {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.tech-dot-fill {
+  animation: techDotFill linear forwards;
+}
