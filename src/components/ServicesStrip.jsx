@@ -36,7 +36,7 @@ const ServicesStrip = () => {
             <div className="animate-marquee">
                 {items.map((service, index) => (
                     <div key={index} className="flex items-center mx-6">
-                        <span className="text-white text-base sm:text-lg font-medium tracking-wide whitespace-nowrap">
+                        <span className="text-white text-base sm:text-lg font-light tracking-wide whitespace-nowrap">
                             {service}
                         </span>
                         <span className="ml-12 text-[#FF5400] text-lg">•</span>

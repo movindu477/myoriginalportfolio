@@ -1,10 +1,10 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { ArrowUpRight, Asterisk } from "lucide-react";
-import meImage from "../assets/me3.jpg";
+import meImage from "../assets/me4.png";
 import { scrollToSection } from "../utils/scroll";
+import Aurora from "./Aurora/Aurora";
 
-// three.js is code-split so it never blocks the hero's first paint
-const HeroScene = lazy(() => import("./HeroScene"));
+const AURORA_STOPS = ["#ef4444", "#f97316", "#ef4444"];
 
 // me3.jpg has its own orange backdrop — soften all four edges so it melts into the hero background
 const PORTRAIT_MASK =
@@ -59,17 +59,26 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative w-full h-svh min-h-[620px] lg:min-h-[680px] overflow-hidden text-white select-none"
-      style={{
-        background:
-          "radial-gradient(120% 90% at 50% 45%, #E9470F 0%, #E6430C 45%, #C93A08 76%, #9E2D05 100%)",
-      }}
+      className="relative w-full h-svh min-h-[620px] lg:min-h-[680px] overflow-hidden bg-[#060606] text-white select-none"
     >
-      {/* ── Layer 1: three.js embers + light ribbons ── */}
-      <div className="absolute inset-0 z-[1]">
-        <Suspense fallback={null}>
-          <HeroScene />
-        </Suspense>
+      {/* ── Layer 1: Aurora WebGL2 background animation ── */}
+      <div className="absolute inset-0 z-[1] pointer-events-none">
+        <Aurora
+          colorStops={AURORA_STOPS}
+          amplitude={1}
+          blend={0.5}
+          height={0.45}
+          speed={1}
+          glow={0.6}
+          scale={1}
+          brightness={1}
+          layers={1}
+          direction="top"
+          opacity={1}
+          mouseInteraction
+          intro
+          lightMode={false}
+        />
       </div>
 
       {/* ── Layer 2: frame grid ── */}
@@ -94,7 +103,7 @@ const Hero = () => {
         />
       </div>
       {/* Soft shade at the bottom so the name stays legible */}
-      <div className="absolute inset-x-0 bottom-0 h-[40%] z-[5] pointer-events-none bg-gradient-to-t from-black/30 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-[40%] z-[5] pointer-events-none bg-gradient-to-t from-black/50 to-transparent" />
 
       {/* ── Tagline + CTAs (top-left) ── */}
       <div
@@ -103,16 +112,17 @@ const Hero = () => {
                    max-w-[88%] sm:max-w-[320px] lg:max-w-[270px] xl:max-w-[320px]"
       >
         <div className="hero-rise" style={{ animationDelay: "0.35s" }}>
-          <p className="uppercase font-semibold leading-[1.55] tracking-wide indent-6 sm:indent-8 text-[11px] sm:text-xs xl:text-[13px] [text-shadow:0_1px_12px_rgba(120,30,0,0.35)]">
+          <p className="uppercase font-semibold leading-[1.55] tracking-wide indent-6 sm:indent-8 text-[11px] sm:text-xs xl:text-[13px] [text-shadow:0_1px_12px_rgba(0,0,0,0.6)]">
             Full Stack Developer and Mobile Application Developer
           </p>
 
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4 sm:mt-5">
             <button
               onClick={() => scrollToSection("contact")}
-              className="group/btn inline-flex items-center gap-2 bg-[#0d0d0d] hover:bg-black text-white
+              className="group/btn inline-flex items-center gap-2 bg-[#141414]/90 hover:bg-black text-white
+                         border border-white/15 hover:border-[#FF5400]/50 backdrop-blur-md
                          font-bold rounded-full pl-4 pr-1.5 py-1.5 text-[11px] sm:text-xs
-                         transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-black/25"
+                         transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-black/40"
             >
               Hire Me
               <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#FF5400] flex items-center justify-center transition-transform duration-300 group-hover/btn:rotate-45">

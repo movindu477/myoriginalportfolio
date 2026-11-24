@@ -80,13 +80,13 @@ const Projects = () => {
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-3">
               <span className="h-px w-8 sm:w-12 bg-[#FF5400]" />
-              <span className="text-[#FF5400] font-bold text-xs uppercase tracking-[0.3em]">Portfolio</span>
+              <span className="text-[#FF5400] font-semibold text-xs uppercase tracking-[0.3em]">Portfolio</span>
             </div>
-            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight uppercase leading-none">
-              Selected <span className="text-white/30 italic font-normal">Works</span>
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight uppercase leading-none">
+              Selected <span className="text-white/40 italic">Works</span>
             </h2>
           </div>
-          <p className="text-white/50 text-sm sm:text-base max-w-md font-medium leading-relaxed">
+          <p className="text-white/65 text-sm sm:text-base max-w-md font-light leading-relaxed">
             A showcase of my recent full-stack web solutions, mobile applications, and interface developments.
           </p>
         </div>
@@ -109,7 +109,7 @@ const Projects = () => {
                 {/* Category Badge (Top Right) */}
                 <div className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1 bg-black/80 backdrop-blur-md border border-white/15 rounded-full text-white/90">
                   <span className="text-[#FF5400]">{getIcon(project.category)}</span>
-                  <span className="text-[10px] font-bold uppercase tracking-widest">{project.category}</span>
+                  <span className="text-[11px] font-medium uppercase tracking-widest">{project.category}</span>
                 </div>
               </div>
 
@@ -118,16 +118,16 @@ const Projects = () => {
                 <div>
                   {/* Top Row: Big Number + Title */}
                   <div className="flex items-baseline gap-3 mb-2">
-                    <span className="text-3xl font-black text-white/40 group-hover:text-[#FF5400] transition-colors tracking-tighter">
+                    <span className="text-3xl font-bold text-white/40 group-hover:text-[#FF5400] transition-colors tracking-tight">
                       {project.index}
                     </span>
-                    <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight">
                       {project.title}
                     </h3>
                   </div>
 
                   {/* Project Description */}
-                  <p className="text-xs sm:text-sm text-white/60 font-medium leading-relaxed mb-4">
+                  <p className="text-xs sm:text-sm text-white/65 font-light leading-relaxed mb-4">
                     {project.description}
                   </p>
                 </div>

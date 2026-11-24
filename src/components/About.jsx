@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Download, CheckCircle, Layers, Code, Sparkles, ExternalLink, Globe, Smartphone, Database, Quote, ArrowUpRight } from "lucide-react";
-import meImage from "../assets/me3.jpg";
+import meImage from "../assets/me3.png";
 import resumeFile from "../assets/Movindus_CV.pdf";
 
 const CountUp = ({ end, duration = 2000 }) => {
@@ -95,9 +95,9 @@ const About = () => {
         <div className={`mb-12 sm:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-10 sm:w-12 bg-[#FF5400]"></div>
-            <span className="text-[#FF5400] font-black text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em]">My Identity</span>
+            <span className="text-[#FF5400] font-semibold text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em]">My Identity</span>
           </div>
-          <h2 className="text-3xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.1] sm:leading-tight uppercase tracking-tighter">
+          <h2 className="text-3xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.1] sm:leading-tight uppercase tracking-tight">
             Architecting <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40 italic">Digital</span><br />
             Experiences.
           </h2>
@@ -120,7 +120,7 @@ const About = () => {
                 <div className="absolute bottom-6 left-6 right-6 p-4 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
-                    <span className="text-white text-[10px] font-black uppercase tracking-widest leading-none">Available for Work</span>
+                    <span className="text-white text-xs font-semibold uppercase tracking-widest leading-none">Available for Work</span>
                   </div>
                   <Sparkles className="w-4 h-4 text-[#FF5400]" />
                 </div>
@@ -128,7 +128,7 @@ const About = () => {
 
               {/* Back Decorative Elements */}
               <div className="absolute -inset-4 border border-white/5 rounded-[40px] -z-10 group-hover:scale-105 transition-transform duration-700"></div>
-              <div className="absolute -top-12 -left-12 text-[12rem] font-black text-white/[0.02] select-none pointer-events-none italic">01</div>
+              <div className="absolute -top-12 -left-12 text-[12rem] font-bold text-white/[0.02] select-none pointer-events-none italic">01</div>
             </div>
 
             {/* Resume Button */}
@@ -142,8 +142,8 @@ const About = () => {
                   <Download className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
                 </div>
                 <div>
-                  <span className="block text-white font-black uppercase text-xs sm:text-sm tracking-widest transition-colors duration-500 group-hover:text-white">Download CV</span>
-                  <span className="block text-white/40 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest group-hover:text-white/80">Latest Version (PDF)</span>
+                  <span className="block text-white font-bold uppercase text-xs sm:text-sm tracking-widest transition-colors duration-500 group-hover:text-white">Download CV</span>
+                  <span className="block text-white/50 text-[11px] uppercase font-light tracking-widest group-hover:text-white/85">Latest Version (PDF)</span>
                 </div>
               </div>
               <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-white/20 group-hover:text-white transition-colors" />
@@ -155,22 +155,22 @@ const About = () => {
 
             {/* Biography */}
             <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-              <p className="text-white/60 text-lg sm:text-xl leading-relaxed font-medium mb-8">
-                I am a results-driven <span className="text-white font-bold">Full-Stack Developer</span> and <span className="text-white font-bold italic">Flutter Specialist</span> based in Colombo. My work is defined by the intersection of performance, design, and scalability.
+              <p className="text-white/70 text-lg sm:text-xl leading-relaxed font-light mb-8">
+                I am a results-driven <span className="text-white font-semibold">Full-Stack Developer</span> and <span className="text-white font-semibold italic">Flutter Specialist</span> based in Colombo. My work is defined by the intersection of performance, design, and scalability.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4 py-10 sm:py-12 border-y border-white/5 text-center sm:text-left">
                 <div className="flex flex-col gap-1 sm:gap-2">
-                  <span className="text-4xl sm:text-5xl font-black text-white italic leading-none"><CountUp end={2} />+</span>
-                  <span className="text-[9px] sm:text-[10px] text-white/30 uppercase font-black tracking-[0.2em] sm:tracking-[0.3em]">Years XP</span>
+                  <span className="text-4xl sm:text-5xl font-bold text-white italic leading-none"><CountUp end={2} />+</span>
+                  <span className="text-[11px] text-white/45 uppercase font-light tracking-[0.2em] sm:tracking-[0.25em]">Years XP</span>
                 </div>
                 <div className="flex flex-col gap-1 sm:gap-2">
-                  <span className="text-4xl sm:text-5xl font-black text-[#FF5400] leading-none"><CountUp end={12} />+</span>
-                  <span className="text-[9px] sm:text-[10px] text-white/30 uppercase font-black tracking-[0.2em] sm:tracking-[0.3em]">Built Projects</span>
+                  <span className="text-4xl sm:text-5xl font-bold text-[#FF5400] leading-none"><CountUp end={12} />+</span>
+                  <span className="text-[11px] text-white/45 uppercase font-light tracking-[0.2em] sm:tracking-[0.25em]">Built Projects</span>
                 </div>
                 <div className="flex flex-col gap-1 sm:gap-2">
-                  <span className="text-4xl sm:text-5xl font-black text-white tracking-tighter leading-none"><CountUp end={99} />%</span>
-                  <span className="text-[9px] sm:text-[10px] text-white/30 uppercase font-black tracking-[0.2em] sm:tracking-[0.3em]">Client Satisfaction</span>
+                  <span className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-none"><CountUp end={99} />%</span>
+                  <span className="text-[11px] text-white/45 uppercase font-light tracking-[0.2em] sm:tracking-[0.25em]">Client Satisfaction</span>
                 </div>
               </div>
             </div>
@@ -197,19 +197,19 @@ const About = () => {
                                       transition-all duration-500 group-hover:bg-[#FF5400] group-hover:text-white group-hover:rotate-[-6deg]">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <span className="text-sm font-black text-white/15 tracking-widest transition-colors duration-500 group-hover:text-[#FF5400]">
+                      <span className="text-sm font-semibold text-white/25 tracking-widest transition-colors duration-500 group-hover:text-[#FF5400]">
                         0{idx + 1}
                       </span>
                     </div>
 
                     <div className="relative mt-auto pt-8">
-                      <h4 className="text-white font-black uppercase tracking-wider text-sm sm:text-base">{item.title}</h4>
-                      <p className="mt-2 text-white/45 text-[11px] sm:text-xs leading-relaxed">{item.description}</p>
+                      <h4 className="text-white font-bold uppercase tracking-wider text-sm sm:text-base">{item.title}</h4>
+                      <p className="mt-2 text-white/55 text-xs sm:text-sm font-light leading-relaxed">{item.description}</p>
                       <div className="flex flex-wrap gap-1.5 mt-4">
                         {item.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="px-2.5 py-1 rounded-md border border-white/10 bg-white/[0.04] text-[9px] sm:text-[10px] font-bold text-white/55 tracking-wider
+                            className="px-2.5 py-1 rounded-md border border-white/10 bg-white/[0.04] text-[11px] font-light text-white/65 tracking-wide
                                        transition-colors duration-500 group-hover:text-white group-hover:border-[#FF5400]/30"
                           >
                             {tag}
@@ -244,10 +244,10 @@ const About = () => {
                 </div>
 
                 <div className="relative mt-6">
-                  <p className="text-white font-black text-base sm:text-lg leading-snug uppercase tracking-tight italic">
+                  <p className="text-white font-bold text-base sm:text-lg leading-snug uppercase tracking-tight italic">
                     Turning complex code into simple, elegant digital products.
                   </p>
-                  <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.25em] text-white/75">— Movindu Weerabahu</p>
+                  <p className="mt-4 text-[11px] font-light uppercase tracking-[0.25em] text-white/85">— Movindu Weerabahu</p>
                 </div>
               </div>
             </div>
